@@ -1,0 +1,158 @@
+<!-- Consider using list group button or link instead -->
+  <ul class="list-group">
+	{% for map in availableMaps %}
+	  <li id="Map-{{ map.Map }}" class="list-group-item">
+	  	<a data-toggle="collapse" href="#revert-{{ map.id }}" role="button" aria-expanded="false" aria-controls="revert-{{ map.id }}" ic-get-from="../map-history.php?Map={{ map.Map }}&token=admin" ic-target="#{{ map.Map }}-history">
+          Map {{ map.Map }}  
+        </a>
+          <span class="badge badge-pill badge-secondary">{{ map.cNH }}</span>
+          <span class="pl-2">
+	        <small class="text-muted" id="Map-Header-{{ map.Map }}">
+	        	{% if Filter == 'deactivated' %}
+	        		{{ map.notAvailableDate|date("d M Y") }}
+	        	{% endif %}
+	        	{% if Filter == 'assigned' %}
+	        		{{ map.Name }} ({{ map.coverageType }})
+	        	{% endif %}
+	        	{% if Filter == 'unassigned' %}
+	        	    <a class="text-secondary" data-toggle="collapse" href="#collapse-{{ map.Map }}" role="button" aria-expanded="false" aria-controls="collapse-{{ map.Map }}">
+	        		{% if map.note %}
+	                  {{ map.note }}
+	                {% else %}
+	                  Add note...
+	        	    {% endif %}	
+	        	    </a>
+	        	{% endif %}
+	        </small>
+	      </span>
+	  	<div class="float-right"><span class="badge badge-{{ map.Colour }}">{{ map.Suburb }}</span></div>
+	  	
+	  	<div id="alert-{{ map.Map }}"></div>
+	  	
+	  	<div class="collapse" id="collapse-{{ map.Map }}">
+          	<form class="my-3" ic-post-to="map.php" ic-target="#Map-Header-{{ map.Map }}">
+		      <input type="hidden" name="id" value="{{ map.id }}">
+		      <div class="input-group mb-3">
+			    <input type="text" class="form-control" placeholder="Add note" aria-label="Map Note" aria-describedby="basic-addon2" name="note" value="{{ map.note }}">
+			    <div class="input-group-append">
+     		      <input class="btn btn-outline-secondary" type="submit" name="updateNote" value="Update">
+     		      <input class="btn btn-outline-secondary" type="submit" name="deleteNote" value="Delete">
+			    </div>
+			  </div> 
+		      		      
+		    </form>
+		    </div>
+
+	  	<div class="collapse my-2" id="revert-{{ map.id }}">
+
+	  	 <!-- Assigned maps -->
+          {% if Filter == 'assigned' %}
+          <div class="d-flex justify-content-around">
+            
+            <!-- Unassign buton -->
+            <div>
+            <form class="my-3" ic-post-to="map.php" ic-confirm="Are you sure?" ic-target="#alert-{{ map.Map }}">
+		      <input type="hidden" name="id" value="{{ map.mapAssignmentId }}">
+		      <input type="hidden" name="cAH" value="{{ map.cAH }}">
+		      <input type="hidden" name="Map" value="{{ map.id }}">
+		      <input class="btn btn-outline-primary" type="submit" name="unassign" value="Unassign Map">
+		   </form>
+           </div>
+
+           
+           <!-- Revoke buton -->
+          <div>
+		   <form class="my-3" ic-post-to="map.php" ic-confirm="Are you sure?" ic-target="#alert-{{ map.Map }}">
+		      <input type="hidden" name="id" value="{{ map.mapAssignmentId }}">
+		      <input type="hidden" name="Map" value="{{ map.id }}">
+		      <input class="btn btn-outline-danger" type="submit" name="revoke" value="Revoke Assignment">
+		   </form>
+		   </div>
+		  </div>  
+
+	      {% endif %}
+
+          <!-- Unassigned maps -->
+          {% if Filter == 'unassigned' %}
+          	<div class="card my-5">
+			  <div class="card-header">
+			    Assign
+			    <div class="float-right">
+			      <form action="map.php" method="POST">
+				    <input type="hidden" name="id" value="{{ map.id }}">
+				    <input class="btn btn-outline-secondary btn-sm" type="submit" name="deactivate" value="Deactivate">
+				  </form>
+			    </div>
+			  </div>
+			  <div class="card-body">
+			  	<div id="alert-{{ map.id }}"></div>
+
+			    <form ic-post-to="map.php" ic-target="#alert-{{ map.id }}">
+				  <input type="hidden" name="id" value="{{ map.id }}">
+	              <input type="hidden" name="cAH" value="{{ map.cAH }}">
+
+	                <div class="input-group input-group-sm mb-3">
+					  <!-- Assign to -->
+					  <div class="input-group-prepend">
+					  <span class="input-group-text" id="inputGroupSelect01">Assign to</span>
+					  </div>
+				      <select class="custom-select" id="inputGroupSelect01" name="userId">
+					    <option selected>Choose...</option>
+					  {% for user in users %}   
+					    <option value="{{ user.id }}">{{ user.first }}</option>
+                      {% endfor %}
+					  </select>
+					</div>
+				    
+				    <!-- Coverage -->
+				    <div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <label class="input-group-text" for="inputGroupSelect02">Coverage</label>
+					  </div>
+					  <select class="custom-select" id="inputGroupSelect02" name="coverageType">
+					    <option selected>Choose...</option>
+					    <option value="First pass">First pass</option>
+					    <option value="Not at Homes">Not at Homes</option>
+					    <option value="Phone">Phone</option>
+					  </select>
+					</div>
+					
+					<input class="btn btn-outline-primary btn-block" type="submit" name="assign" value="Assign Map">
+				  </form>  
+				</div>
+			</div>
+          
+          {% endif %}
+          {% if Filter == 'deactivated' %}
+          <form action="map.php" method="POST">
+		    <input type="hidden" name="id" value="{{ map.id }}">
+		    <input class="btn btn-outline-primary btn-sm btn-block" type="submit" name="activate" value="Activate Map">
+		  </form>
+          {% endif %}
+
+          <div id="{{ map.Map }}-history"></div>    
+
+          <div class="card my-5">
+		    <div class="card-header">
+		      Map
+		    </div>
+		    <div class="card-body">
+		      <img src="http://skyricho.github.io/img/maps/{{ map.Map }}.jpg" class="img-fluid" alt="Map {{ map.Map }}">
+		      <!--<div class="text-center">
+                <img src="http://skyricho.github.io/img/maps/{{ map.Map }}.jpg" class="img-fluid" alt="Map {{ map.Map }}">-->
+              </div>
+		    </div>
+		  </div>
+        
+        </div>
+
+
+
+	  </li>
+	{% endfor %}
+   </ul>
+
+
+   
+
+        

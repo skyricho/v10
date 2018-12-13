@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Map {{ mapNumber }} - At Homes{% endblock %}
+{% block Navbar %}
+	<a class="navbar-brand" href="index.php">At Homes</a>
+	<button class="nav-link btn btn-outline-light" data-toggle="collapse" href="#map-{{ mapNumber }}-info" role="button" aria-expanded="false" aria-controls="map-{{ mapNumber }}-info">Map {{ mapNumber }}</button>
+	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>          
+	</button>
+
+	<div class="navbar-collapse collapse" id="navbarsExample01" style="">
+	  <ul class="navbar-nav mr-auto">
+	    <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Go to</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for availableMap in availableMaps %}
+                <a class="dropdown-item" href="ah.php?Map={{ availableMap.Map }}">
+                  Map {{ availableMap.Map }}
+                  <div class="float-right">
+                  	<span class="badge badge-pill badge-{{ availableMap.Colour }}">
+                  		{{ availableMap.Suburb }}
+                  	</span>
+                  </div>
+                </a> 
+              {% endfor %}
+          </li> -->
+          <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	           {% if navbarFilter %}
+                 Hide Contacted
+               {% else %}
+                 Show All
+               {% endif %}
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="ah.php?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}">
+	            Show All
+	          </a>
+	          <a class="dropdown-item" href="ah.php?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}&Filter=Contacted">
+	            Hide Contacted
+	          </a>
+	        </div>
+          </li>
+	    <!--
+	    <li class="nav-item">
+	      <a class="nav-link disabled" href="#">Account</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="signout.php">Sign out</a>
+	    </li> -->
+	  </ul>
+	</div>
+{% endblock %}
+{% block content %}
+    <div class="collapse" id="map-{{ mapNumber }}-info">
+      <div class="text-center">
+          <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
+      </div>
+    </div>
+    <!-- Nav: block, street and filter -->
+    {% if addresses %}   
+    <ul class="nav">
+	  <li class="nav-item">
+	    <div class="dropdown">
+	      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	        Block {{ blockNumber}}
+	      </a>
+	      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	      {% for mapBlock in mapBlocks %}
+	        <a class="dropdown-item" href="ah.php?Map={{ mapNumber }}&Block={{ mapBlock.Block }}&Filter={{ Filter }}">
+	          Block {{ mapBlock.Block }} [{{ mapBlock.blockToContact }}] 
+	        </a>
+	      {% endfor %} 
+          </div>
+	    </div>
+	  </li>
+	  <li class="nav-item">
+	    <div class="dropdown">
+	      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	        {% if street %}
+               {{ street }}
+            {% else %}
+               Street
+            {% endif %}
+	      </a>
+	      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	      {% for street in streets %}
+	        <a class="dropdown-item" href="ah.php?Map={{ mapNumber }}&Block={{ blockNumber }}&Street={{ street.streetWithDash }}&Filter={{ Filter }}">
+	          {{ street.street }}
+	        </a>
+	      {% endfor %} 
+          </div>
+	    </div>
+	  </li>
+	</ul>
+
+      {% include 'addressList.twig' %}
+    {% else %}
+      <ul class="list-group">
+		{% for mapBlock in mapBlocks %}
+		  <li id="Map-99-Block-88" class="list-group-item">
+		  	<a  href="ah.php?Map={{ mapNumber }}&Block={{ mapBlock.Block }}" role="button">
+		  	   Block {{ mapBlock.Block }}	 
+			</a>
+			<div class="float-right">
+			  <span class="badge badge-pill badge-secondary">{{ mapBlock.blockToContact }}</span>
+			</div>
+		  </li>
+	   {% endfor %}
+	  </ul>
+    {% endif %}
+	
+{% endblock %}

@@ -1,0 +1,10 @@
+{% block content %}
+  <ul class="list-group">
+  {% for user in users %}
+    <li id="user-{{ user.id }}" class="list-group-item">
+      {{ user.first }} {{ user.last }}
+    </li>
+  {% endfor %}
+  </ul>
+  
+{% endblock %}

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+  
+      <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+  </head>
+  <body>
+      <nav class="navbar navbar-dark bg-secondary">
+      {% block Navbar %}
+        <a class="navbar-brand" href="index.php">At Homes</a>
+      {% endblock %}
+    </nav>
+    {% block content %}
+      
+    {% endblock %}
+    <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      
+      <script>
+        function updateAtHome(vID, Filter, vIsHome) {
+          if (vIsHome) {
+            var vIsHome = "ah";
+          }
+
+          $.post("updateAddress.php",
+          {
+            id: vID,
+            Filter: Filter,
+            isHome: vIsHome,
+         },
+          function(data,status){
+              var e1 = (data);
+  //          alert(e1);
+              document.getElementById(vID).innerHTML = e1;
+          });
+        }
+      </script>
+      <script>
+        function loadHousingUnits(id, Filter, divID1) {
+        //    alert("hello world!");
+        //    alert("Unit " + id + ": " + Filter);
+              
+            $.get("HousingUnits.php",
+                {
+                  id: id,
+                  Filter: Filter
+                },
+                function(data,status){
+                    var e1 = (data);
+        //            alert(e1);
+                    document.getElementById(divID1).innerHTML = e1;
+                });
+        }
+      </script>
+      <script>
+        function updateHousingUnit(id, isHome, Filter, divID) {
+        //    alert("hello world!");
+        //    alert("Unit " + id + ": " + isHome + " (" + Filter + ")" + ' ' + divID);
+        /*      if (isHome) {
+                  var isHome = "ah";
+              }*/
+
+            $.post("updateHousingUnit.php",
+                {
+                  id: id,
+                  isHome: isHome,
+                  Filter: Filter
+                },
+                function(data,status){
+                    var e1 = (data);
+//                    alert(e1);
+                    document.getElementById(divID).innerHTML = e1;
+                });
+        }
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+      <script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.2.1.min.js"></script>
+  </body>
+</html>

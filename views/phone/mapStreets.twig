@@ -1,0 +1,19 @@
+<ul class="list-group">
+  {% for mapStreet in mapStreets %}
+	<li id="Map-99-Street-88" class="list-group-item">
+	  {% if mapStreet.streetToContact > 0 %}
+	  <a  href="?Map={{ mapNumber }}&Street={{ mapStreet.streetWithDash }}" role="button">
+	  {{ mapStreet.Street }}	 
+	  </a>
+	  {% else %}
+	  {{ mapStreet.Street }}
+      {% endif %}
+	  <div class="float-right">
+        <span class="badge badge-pill badge-secondary">{{ mapStreet.streetToContact }}</span>
+	  </div>
+	</li>
+  {% endfor %}
+    <li class="list-group-item">
+      <a href="?Map={{ mapNumber }}&Street=*&Filter=No-answer" role="button">Status: No answer</a>
+	</li>
+</ul>

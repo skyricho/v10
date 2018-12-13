@@ -1,0 +1,73 @@
+<!-- Nav: block, street and filter -->  
+ {% if not errorMessage %}
+ <ul class="nav">
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if street == '*' %}
+             No Answer
+          {% elseif  street %}
+            {{ street }}
+          {% else  %}
+             Street
+          {% endif %}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      {% for street in streets %}
+        <a class="dropdown-item" href="?Map={{ mapNumber }}&Street={{ street.streetWithDash }}&Filter={{ Filter }}">
+          {{ street.street }}
+        </a>
+      {% endfor %} 
+        </div>
+    </div>
+  </li>
+</ul>
+{% endif %}
+
+<ul class="list-group">
+  {% for address in addresses %}
+      <li id="{{ address.recID }}" class="list-group-item">
+        <a data-toggle="collapse" href="#revert-{{ address.recID }}" role="button" aria-expanded="false" aria-controls="revert-{{ address.recID }}" ic-get-from="get-phone-numbers.php?propertyID={{ address.recID }} " ic-target="#{{ address.recID }}-phone-numbers">
+          {{ address.streetNumber }} {{ address.streetName }}
+        </a>
+        <div class="float-right" id="{{ address.recID }}-status"><span class="badge badge-{{ address.badgeColour }}">{{ address.status }}</span></div>
+        <div class="collapse card mt-2 mb-5" id="revert-{{ address.recID }}">
+          <div class="card-header p-2 pb-5">
+          
+          <form class="form-inline" ic-post-to="update-action.php" ic-target="#{{ address.recID }}-status">
+            <div class="input-group my-3">
+            <input type="hidden" name="recID" value="{{ address.recID }}">
+            <select class="form-control" name="actionID">
+              <option selected>Status update...</option>
+              {% for phoneAction in phoneActions %}
+              <option value="{{ phoneAction.actionID }}">{{ phoneAction.action }}</option>
+              {% endfor %}
+              <option value="0">Clear</option>          
+            </select>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary">Submit</button>
+            </div>
+          </div>
+          </form>
+
+          {% include 'phone/phone-numbers.twig' %}
+          <div class="mt-3" id="{{ address.recID }}-phone-numbers"></div>          
+          <div id="{{ address.recID }}-foo"></div>
+          <form id="{{ address.recID }}-add-phone-number" ic-post-to="add-phone.php" 
+          ic-target="#{{ address.recID }}-phone-numbers" ic-on-success="$('#{{ address.recID }}-add-phone-number')[0].reset()" ic-swap-style="append">
+            <div class="input-group mt-3">
+              <input type="hidden" name="propertyID" value="{{ address.recID }}">
+              <input type="text" class="form-control" id="{{ address.recID }}-exampleInputText1" placeholder="Enter phone number" name="phoneNumber" value="">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        
+        </div>  
+      </li>
+  {% endfor %}
+</ul>
+
+          

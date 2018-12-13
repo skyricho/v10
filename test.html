@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+
+<input class="form-control mt-3" type="text" name="search" placeholder="Assign to..." ic-get-from="search.php" ic-trigger-on="keyup changed" ic-trigger-delay="500ms" ic-target="#foo" ic-indicator="#indicator">
+
+<div id="foo"></div>
+<div id="bar"></div>
+
+<hr>
+<a href="search.php?search=cr">Click Me!</a><br>
+<a ic-get-from="search.php?search=cr" ic-target='#target_span'>Click Me!</a>
+  <span id="target_span"></span>
+
+  <br><br>
+
+<hr>
+ <h3>
+    Search Contacts
+    <span id="indicator" style="display:none">
+      <i class="fa fa-spinner fa-spin"></i> Searching...
+    </span>
+  </h3>
+
+
+  <input class="form-control" type="text" name="search" placeholder="Begin Typing To Search Users..." ic-get-from="search.php" ic-trigger-on="keyup changed" ic-trigger-delay="500ms" ic-target="#contact-table-body" ic-indicator="#indicator">
+
+<div id="contact-table-body">
+<div>
+
+
+
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.2.1.min.js"></script>
+</body>

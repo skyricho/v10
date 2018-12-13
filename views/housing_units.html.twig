@@ -1,0 +1,32 @@
+<ul class="list-group">
+  {% for housing_unit in housing_units %}
+  	{% if housing_unit.cStatus == 'ah' %}
+  		<li class="list-group-item list-group-item-light" id="{{ streetNumber }}-unit-{{ housing_unit.Number }}">
+          <a data-toggle="collapse" href="#revert-unit-{{ housing_unit.unitID }}" role="button" aria-expanded="false" aria-controls="revert-unit-{{ housing_unit.unitID }}">
+		    Unit {{ housing_unit.Number }}
+		  </a>
+		  <div class="float-right">
+			  <small><i>At home {{ housing_unit.Date|date("D d M") }}</i></small>
+			  <div class="collapse" id="revert-unit-{{ housing_unit.unitID }}">
+			    <button onclick="updateHousingUnit('{{ housing_unit.unitID }}', '', '', '{{ streetNumber }}-unit-{{ housing_unit.Number }}')" class="btn btn-outline-secondary btn-sm">
+			      Clear at home date
+			    </button>
+			  </div>
+		  </div>
+	    </li>
+  	{% elseif housing_unit.cStatus == 'DNC' %}
+  	  <li class="list-group-item list-group-item-danger" id="{{ streetNumber }}-unit-{{ housing_unit.Number }}">
+        Unit {{ housing_unit.Number }}
+	    <div class="float-right">
+	      <button type="button" class="btn btn-outline-danger btn-sm" disabled>Do Not Call</button>
+	    </div>
+  	{% else %}
+  	  <li class="list-group-item list-group-item-light" id="{{ streetNumber }}-unit-{{ housing_unit.Number }}">
+        Unit {{ housing_unit.Number }}
+	    <div class="float-right">
+	      <button onclick="updateHousingUnit('{{ housing_unit.unitID }}', 'ah', '', '{{ streetNumber }}-unit-{{ housing_unit.Number }}')" class="btn btn-outline-secondary btn-sm">At Home</button>
+	    </div>
+	  </li>
+  	{% endif %}
+  {% endfor %}
+</ul>

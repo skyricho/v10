@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Create Account to use At Homes{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  {% if idForForm %}
+     <div class="text-center">
+       <form action="create-account.php" method="post">
+    <!--  <form action="create-account.php" method="post"> -->
+        <input type="text" name="id" value="{{ idForForm }}"/>
+        <input type="text" name="email" value="email"/>
+        <input type="text" name="password" value="password"/>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  {% else %}
+              
+  <p>Account created.</p>
+  <p>userID: {{ id }}</p>
+  <p>e: {{ email }}</p>
+  <p>p: {{ password }}</p>
+
+   
+
+
+ </div>
+  {% endif %}
+</div>
+{% endblock %}

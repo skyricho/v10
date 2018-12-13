@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Test ic-on-success</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Test ic-on-success</h1>
+      <p>Objective: clear input on submit so the clear button is no longer needed.</p>
+
+      <div class="mt-5" id="result"></div>
+      <h6 class="mt-5">With ic-on-success</h6>
+      <form id="add-phone-number" ic-post-to="add-phone.php" ic-target="#result" ic-on-success="$('#add-phone-number')[0].reset()">
+        <div class="input-group mt-3">
+          <input type="hidden" name="propertyID" value="20">
+          <input type="text" class="form-control" id="exampleInputText" placeholder="Enter phone number" name="phoneNumber" value="">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="reset">Clear</button>
+            <button class="btn btn-outline-secondary" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <small class="form-text text-muted">This now works. Anders Baumann's fix: <code>form.reset()</code> 
+      is a DOM element method (not one on the jQuery object). So try this instead:
+      <code>$("#add-phone-number")[0].reset();</code></small>
+
+      <h6 class="mt-5">Without ic-on-success</h6>
+      <form class="mb-5" id="add-phone-number1" ic-post-to="add-phone.php" ic-target="#result">
+        <div class="input-group mt-3">
+          <input type="hidden" name="propertyID" value="20">
+          <input type="text" class="form-control" id="exampleInputText1" placeholder="Enter phone number" name="phoneNumber" value="">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="reset">Clear</button>
+            <button class="btn btn-outline-secondary" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <h6 class="mt-5">With ic-success-action</h6>
+      <form class="mb-5" id="add-phone-number2" ic-post-to="add-phone.php" ic-target="#result" ic-success-action="$('#add-phone-number')[0].reset()">
+        <div class="input-group mt-3">
+          <input type="hidden" name="propertyID" value="20">
+          <input type="text" class="form-control" id="exampleInputText2" placeholder="Enter phone number" name="phoneNumber" value="">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="reset">Clear</button>
+            <button class="btn btn-outline-secondary" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="btn btn-primary" ic-action="$('#add-phone-number')[0].reset()" ic-trigger-on="default">Reset form</div>
+      <div class="btn btn-primary" ic-action="fadeOut;remove" ic-trigger-on="default">Code: fadeOut;remove</div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

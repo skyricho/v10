@@ -1,0 +1,39 @@
+{% if phones %}
+<div class="card">
+  <div class="list-group list-group-flush">
+    {% for phone in phones %}
+	<li class="list-group-item" id="{{ phone.recID }}-phone">
+	  {% if phone.notInService %}
+	  {{ phone.phone }}<span class="badge badge-light">Disconnected</span>
+	  {% else %}
+	  <a href="tel:{{ phone.phoneSafe }}">{{ phone.phone }}</a>
+	  {% endif %}
+	  <!-- Split dropleft button -->
+		<div class="btn-group float-right">
+		  <div class="btn-group dropleft" role="group">
+		    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		      <span class="sr-only">Call</span>
+		    </button>
+		    <div class="dropdown-menu">
+		      <!-- Dropdown menu links -->
+		      <a class="dropdown-item" href="#" ic-post-to="update-phone.php?recID={{ phone.recID }}" ic-target="#{{ phone.recID }}-phone" ic-swap-style="replace">Disconnected</a>
+			  <!--<a class="dropdown-item" href="#" ic-post-to="add-phone.php">Delete</a> This is very naughty because you are not supposed to delte records with via GET-->
+			  <a class="dropdown-item" href="#" ic-post-to="delete-phone.php?recID={{ phone.recID }}" ic-success-action="fadeOut:2500;remove" ic-target="#{{ phone.recID }}-phone">Delete</a>
+			  <!-- this form results in the message form the server replacing the work delete
+			  <form ic-delete-from="delete-phone.php">
+	            <input type="hidden" name="propertyID" value="{{ phone.recID }}">
+	            <button class="dropdown-item" type="submit">Delete</button>
+	          </form>-->
+		    </div>
+		  </div>
+		  <a href="tel:{{ phone.phoneSafe }}" role="button" class="btn btn-secondary btn-sm">
+		    Call
+		  </a>
+		</div>
+	</li>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+

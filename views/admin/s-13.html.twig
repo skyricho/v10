@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}S-13 Form{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="../index.php">At Homes</a>
+  Admin
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">
+        {% if mapNumber %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {% if navbarFilter %}
+                 Hide Contacted
+               {% else %}
+                 Show All
+               {% endif %}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}">
+              Show All
+            </a>
+            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}&Filter=Contacted">
+              Hide Contacted
+            </a>
+          </div>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+        <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
+        </li> 
+        <li class="nav-item">
+        <a class="nav-link" href="../phone">Phone Calls</a>
+        </li>
+         <li class="nav-item">
+        <a class="nav-link" href="?Filter=out">Admin</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="s-13.php">S-13</a>
+        </li>
+      <!--
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="signout.php">Sign out</a>
+      </li>-->
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+{% for map in maps %}
+  {% if map.MapAssignments %}
+  <h6>Map {{ map.Map }}</h6>
+  {{ map.MapAssignments|nl2br }}<br>
+  {% endif %}    
+{% endfor %}
+</div>
+{% endblock %}
+
+

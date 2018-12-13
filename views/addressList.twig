@@ -1,0 +1,200 @@
+
+<!-- Nav: block, street and filter -->  
+ <ul class="nav">
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Block {{ blockNumber}}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      {% for mapBlock in mapBlocks %}
+        <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{ mapBlock.Block }}&Filter={{ Filter }}">
+          Block {{ mapBlock.Block }} [{{ mapBlock.blockToContact }}] 
+        </a>
+      {% endfor %} 
+        </div>
+    </div>
+  </li>
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if street %}
+             {{ street }}
+          {% else %}
+             Street
+          {% endif %}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      {% for street in streets %}
+        <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{ blockNumber }}&Street={{ street.streetWithDash }}&Filter={{ Filter }}">
+          {{ street.street }}
+        </a>
+      {% endfor %} 
+        </div>
+    </div>
+  </li>
+   <li class="nav-item">
+      <!-- Example single danger button -->
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Action
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="#exampleModal" data-toggle="modal" data-target="#exampleModal">Add address</a>
+        <a class="dropdown-item" href="#exampleModal1" data-toggle="modal" data-target="#exampleModal1">Delete address</a>
+        <a class="dropdown-item disabled" href="#">Add DNC</a>
+      </div>
+    </ul>
+  </li>
+
+<!-- Modal  to add address -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Number</span>
+            </div>
+            <input type="text" class="form-control" name="streetNumber" value="" placeholder="Enter street number" aria-label="streetNumber" aria-describedby="basic-addon1">
+          </div>
+          <div class="form-group mb-3">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Add a note like 'has 12 units' etc..."></textarea>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon2">Street</span>
+            </div>
+            <input type="text" class="form-control" name="streetName" value="{{ street }}" placeholder="Enter street name" aria-label="streetName" aria-describedby="basic-addon2">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Block</span>
+            </div>
+            <input type="text" class="form-control" name="blockNumber" value="{{ blockNumber }}"placeholder="Enter block number" aria-label="blockNumber" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon4">Name</span>
+            </div>
+            <input type="text" class="form-control" name="firstName" value="" placeholder="Enter first name" aria-label="firstName" aria-describedby="basic-addon4">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-primary" disabled>Save Address</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal  to delete address -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Delete Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Number</span>
+            </div>
+            <input type="text" class="form-control" name="streetNumber" value="" placeholder="Enter street number" aria-label="streetNumber" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon2">Street</span>
+            </div>
+            <input type="text" class="form-control" name="streetName" value="{{ street }}" placeholder="Enter street name" aria-label="streetName" aria-describedby="basic-addon2">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Block</span>
+            </div>
+            <input type="text" class="form-control" name="blockNumber" value="{{ blockNumber }}"placeholder="Enter block number" aria-label="blockNumber" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon4">Name</span>
+            </div>
+            <input type="text" class="form-control" name="firstName" value="" placeholder="Enter first name" aria-label="firstName" aria-describedby="basic-addon4">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-danger" disabled>Delete Address</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="list-group">
+  {% for address in addresses %}
+    {% if address.cStatus == 'ah' %}
+      <!-- Contacted -->
+      <li id="{{ address.recID }}" class="list-group-item">
+        <a data-toggle="collapse" href="#revert-{{ address.recID }}" role="button" aria-expanded="false" aria-controls="revert-{{ address.recID }}">
+          {{ address.streetNumber }} {{ address.streetName }}    
+        </a>
+        <div class="float-right">
+            <small><i>At home {{ address.modDate|date("D d M") }}</i></small>
+          <div class="collapse" id="revert-{{ address.recID }}">
+            <button onclick="updateAtHome({{ address.recID }},)" id="{{ address.recID }}" class="btn btn-outline-primary btn-sm">Clear at home date</button>
+          </div>
+        </div>
+      </li>
+    {% elseif address.cStatus == 'DNC' %}
+      <!-- DNC -->
+      <li id="{{ address.recID }}" class="list-group-item list-group-item-danger">
+        {{ address.streetNumber }} {{ address.streetName }}
+        <div class="float-right">  
+          <button type="button" class="btn btn-danger btn-sm" disabled>Do Not Call</button>
+        </div>  
+      </li> 
+    {% elseif address.cStatus == 'HousingUnits' %}
+       <!-- Housing Units -->
+       <!-- <li id="Map-99-Block-88" class="list-group-item list-group-item-primary">
+        <a  href="ah.php?Map=99&Block=88" role="button">
+        {{ address.streetNumber }} {{ address.streetName }}    
+        </a>
+        <span class="badge badge-light">{{ address.cUnitsCount }} units</span>
+        <span class="badge badge-pill badge-secondary">{{ address.UnitsNH }}</span>
+      </li> -->
+      <li id="{{ address.recID }}" class="list-group-item list-group-item-primary">
+        <a onclick="loadHousingUnits('{{ address.recID }}', 'Contacted', '{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units')" data-toggle="collapse" href="#{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units" role="button" aria-expanded="false" aria-controls="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units">
+        {{ address.streetNumber }} {{ address.streetName }}
+        </a>
+        <span class="badge badge-light">{{ address.cUnitsCount }} units</span>
+        <span class="badge badge-pill badge-secondary">{{ address.UnitsNH }}</span>
+      </li>
+      <div class="collapse" id="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units"></div>
+    {% else %}
+       <!-- Default: Not contacted yet -->
+       <li id="{{ address.recID }}" class="list-group-item">
+          {{ address.streetNumber }} {{ address.streetName }} 
+          <div class="float-right">  
+            <button onclick="updateAtHome('{{ address.recID }}', '', true)" id="{{ address.recID}}" class="btn btn-outline-primary btn-sm">At Home</button>
+          </div>
+          {% if address.description  %}
+          </br><small class="text-muted">{{ address.description|raw }}</small>
+          {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+          

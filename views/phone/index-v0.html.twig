@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}At Homes{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="index.php">
+    <img src="../img/telephone.svg" width="30" height="30" alt="">
+  </a>
+  {% if mapNumber %}
+  <button onclick="loadMapDetails({{ mapNumber }})" class="nav-link btn btn-outline-light" data-toggle="collapse" href="#map-{{ mapNumber }}-info" role="button" aria-expanded="false" aria-controls="map-{{ mapNumber }}-info">Map {{ mapNumber }}</button>
+  {% endif %}
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">  
+      <!--<li class="nav-item">
+        <a class="nav-link disabled" href="#">Account</a>
+      </li>-->
+      <li class="nav-item">
+        <a class="nav-link" href="../">Back to At Homes</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+	<!-- Map image and info -->
+	<div class="collapse" id="map-{{ mapNumber }}-info">
+      <div class="text-center">
+          <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
+      </div>
+      <div class="card">
+        <div class="card card-body" id="mapDetails">
+        </div>
+      </div>
+      <script>
+        function loadMapDetails(Map) {
+        //  alert("hello world!");
+        //  alert("hello Map " + Map);
+          $.get("mapDetails.php",
+                {
+                  Map: Map,
+        //        Filter: Filter
+                },
+                function(data,status){
+                    var e1 = (data);
+        //            alert(e1);
+                    document.getElementById("mapDetails").innerHTML = e1;
+                });    
+ 
+        }
+        </script>
+    </div>
+{% if errorMessage %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ errorMessage }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>  
+{% endif %} 	
+
+{% if availableMaps %}
+  {% include 'availableMaps.twig' %}
+{% endif %} 	
+
+{% if mapNumber and blockNumber %}
+  {% include 'phone/addressList.twig' %}
+{% endif %} 	
+
+{% if mapNumber and not blockNumber %}
+  {% include 'mapBlocks.twig' %}
+{% endif %} 
+
+{% endblock %}
+

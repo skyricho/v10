@@ -1,0 +1,24 @@
+   
+      {% if notInService %}
+      {{ phone }}<span class="badge badge-light">Disconnected</span>
+      {% else %}
+      <a href="tel:{{ phoneSafe }}">{{ phone }}</a>
+	  {% endif %}
+      <!-- Split dropleft button -->
+		<div class="btn-group float-right">
+		  <div class="btn-group dropleft" role="group">
+		    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		      <span class="sr-only">Call</span>
+		    </button>
+		    <div class="dropdown-menu">
+		      <!-- Dropdown menu links -->
+		      <a class="dropdown-item" href="#" ic-post-to="update-phone.php?recID={{ recID }}" ic-target="#{{ recID }}-phone" ic-swap-style="replace">Disconnected</a>
+			  <!--<a class="dropdown-item" href="#" ic-post-to="add-phone.php">Delete</a> This is very naughty because you are not supposed to delte records with via GET-->
+			  <a class="dropdown-item" href="#" ic-post-to="delete-phone.php?recID={{ recID }}" ic-success-action="fadeOut:2500;remove" ic-target="#{{ recID }}-phone">Delete</a>
+		    </div>
+		  </div>
+		  <a href="tel:{{ phoneSafe }}" role="button" class="btn btn-secondary btn-sm">
+		    Call
+		  </a>
+		</div>
+

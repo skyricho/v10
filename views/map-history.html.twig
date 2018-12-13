@@ -1,0 +1,23 @@
+<div class="card my-3">
+  <div class="card-header">
+    History
+    <div class="float-right">
+  	  <span class="badge badge-pill badge-secondary">{{ map.addressTotal }}</span>
+    </div>
+  </div>
+  <div class="card-body">
+	{% for map in mapAssignments %}
+	  <small>
+	  	<span>{{ map.date|date ("M Y") }} </span>
+	  	<span class="badge badge-{{ map.badgeColour }}">{{ map.coverage }}</span>
+	  	{% if token == 'admin' %}
+	  	  <span class="text-muted">{{ map.name }}</span>
+	  	{% endif %}
+	  	<div class="float-right">
+	      <span class="badge badge-pill badge-secondary">{{ map.contacted }}</span>
+	    </div>
+	  </small>
+	  <br>
+	{% endfor %}
+  </div>
+</div>
