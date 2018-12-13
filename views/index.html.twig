@@ -59,9 +59,7 @@
 {% block content %}
 	<!-- Map image and info -->
 	<div class="collapse" id="map-{{ mapNumber }}-info">
-      <div class="text-center">
-          <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
-      </div>
+
     <div class="container">
 
     <div id"mapDetails"></div>
@@ -94,6 +92,7 @@
         }
         </script>
   </div>
+
 {% if errorMessage %}
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   {{ errorMessage }}
@@ -107,11 +106,15 @@
   {% include 'availableMaps.twig' %}
 {% endif %} 	
 
-{% if mapNumber and blockNumber %}
+{% if street %}
+  <div class="text-center">
+      <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
+  </div>
   {% include 'addressList.twig' %}
-{% endif %} 	
-
-{% if mapNumber and not blockNumber %}
+{% elseif mapNumber %}
+  <div class="text-center">
+      <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
+  </div>
   {% include 'mapBlocks.twig' %}
 {% endif %} 
 

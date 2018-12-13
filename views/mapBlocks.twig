@@ -1,4 +1,4 @@
-<ul class="list-group">
+<!--<ul class="list-group">
   {% for mapBlock in mapBlocks %}
 	<li id="Map-99-Block-88" class="list-group-item">
 	  <a  href="?Map={{ mapNumber }}&Block={{ mapBlock.Block }}" role="button">
@@ -9,4 +9,23 @@
 	  </div>
 	</li>
   {% endfor %}
-</ul>
+</ul>-->
+
+<div id="accordion">
+  {% for mapBlock in mapBlocks %}
+  <div class="card">
+    <div class="card-header" id="heading{{ mapBlock.Block }}">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ mapBlock.Block }}" aria-expanded="true" aria-controls="collapse{{ mapBlock.Block }}" ic-get-from="block-streets.php?Map={{ mapNumber}}&Block={{ mapBlock.Block }}" ic-target="#card-body{{ mapBlock.Block }}">
+          Block {{ mapBlock.Block }}
+        </button>
+        <span class="badge badge-pill badge-secondary">{{ mapBlock.blockToContact }}</span>
+      </h5>
+    </div>
+
+    <div id="collapse{{ mapBlock.Block }}" class="collapse" aria-labelledby="heading{{ mapBlock.Block }}" data-parent="#accordion">
+      <div id="card-body{{ mapBlock.Block }}" class="card-body"></div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

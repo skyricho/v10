@@ -77,6 +77,7 @@ if (isset($_GET['Block'])) {
         'streets' => $streets,
         #'mapStreet' => 'quux',
         'navbarFilter' => $_GET['Filter'],
+        'errorMessage' => $_GET['msg']
         )
     );
 
