@@ -67,7 +67,10 @@ foreach($records as $record) {
           //echo '</form>';
 }   
 echo '</div>
-    </div>'; 
+    </div> 
+    <div ic-get-from="map-history.php?Map=' . $_GET['Map'] . '" ic-trigger-on="load">
+      <i class="fa fa-spinner fa-spin fa-2x"></i> Loading map history...
+    </div>';
 ?>
 
 <div id="alert"></div> 
