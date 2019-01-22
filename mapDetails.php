@@ -13,7 +13,7 @@ foreach($records as $record) {
     $SingleDwelling = $record->getField('cSingleDwellingCount');
     $SingleDwellingAH = $record->getField('cSingleDwellingAH');
     $MultiDwelling = $record->getField('cMultiDwellingCount');
-    $MultiDwellingAH = $record->getField('cMultiDwellingCountAH');
+    $MultiDwellingAH = $record->getField('cMultiDwellingAH');
     $DNC = $record->getField('cDNCcount');
     $Contacted = $record->getField('contactedTotal') - $record->getField('MapAssignment::startContacted');//deprecate
     $Addresses = $record->getField('nhTotal');//deprecate
