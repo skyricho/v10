@@ -1,0 +1,221 @@
+<!-- Modal  to add address -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" action="admin/address-change-request.php" method="post" novalidate>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Number</span>
+            </div>
+            <input type="text" class="form-control" name="streetNumber" value="" placeholder="Enter street number" aria-label="streetNumber" aria-describedby="basic-addon1" required>
+            <div class="invalid-feedback">
+              Please enter street number.
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3" placeholder="Add a note like 'has 12 units' etc..."></textarea>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon2">Street</span>
+            </div>
+            <input type="text" class="form-control" name="streetName" value="{{ street }}" placeholder="Enter street name" aria-label="streetName" aria-describedby="basic-addon2">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Map</span>
+            </div>
+            <input type="text" class="form-control" name="map" value="{{ mapNumber }}"placeholder="Enter map number" aria-label="map" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon4">Block</span>
+            </div>
+            <input type="text" class="form-control" name="block" value="{{ blockNumber }}"placeholder="Enter block number" aria-label="block" aria-describedby="basic-addon4">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon5">Name</span>
+            </div>
+            <input type="text" class="form-control" name="userName" value="" placeholder="Enter first name" aria-label="firstName" aria-describedby="basic-addon5" required>
+            <div class="invalid-feedback">
+              Please enter your first name.
+            </div>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <input type="hidden" name="action" value="create">
+        <input type="hidden" name="urlMap" value="{{ mapNumber}}">
+        <input type="hidden" name="urlBlock" value="{{ blockNumber}}">
+        <input type="hidden" name="urlStreet" value="{{ street|replace({' ' : '-' })}}">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-primary" name="addAddress">Save Address</button>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal  to add address -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Add Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" action="admin/address-change-request.php" method="post" novalidate>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Number</span>
+            </div>
+            <input type="text" class="form-control" name="streetNumber" value="" placeholder="Enter street number" aria-label="streetNumber" aria-describedby="basic-addon1"
+            required>
+            <div class="invalid-feedback">
+              Please enter street number.
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon2">Street</span>
+            </div>
+            <input type="text" class="form-control" name="streetName" value="{{ street }}" placeholder="Enter street name" aria-label="streetName" aria-describedby="basic-addon2">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Map</span>
+            </div>
+            <input type="text" class="form-control" name="map" value="{{ mapNumber }}"placeholder="Enter map number" aria-label="map" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon4">Block</span>
+            </div>
+            <input type="text" class="form-control" name="block" value="{{ blockNumber }}"placeholder="Enter block number" aria-label="block" aria-describedby="basic-addon4">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon5">Name</span>
+            </div>
+            <input type="text" class="form-control" name="userName" value="" placeholder="Enter first name" aria-label="firstName" aria-describedby="basic-addon5"required>
+            <div class="invalid-feedback">
+              Please enter your first name.
+            </div>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="urlMap" value="{{ mapNumber}}">
+        <input type="hidden" name="urlBlock" value="{{ blockNumber}}">
+        <input type="hidden" name="urlStreet" value="{{ street|replace({' ' : '-' })}}">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-danger" name="deleteAddress">Delete Address</button>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal  to add DNC -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Do Not Call</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" action="admin/address-change-request.php" method="post" novalidate>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Number</span>
+            </div>
+            <input type="text" class="form-control" name="streetNumber" value="" placeholder="Enter street number" aria-label="streetNumber" aria-describedby="basic-addon1" required>
+            <div class="invalid-feedback">
+              Please enter street number.
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3" placeholder="Add a note like 'has 12 units' etc..." required=""></textarea>
+            <div class="invalid-feedback">
+              Please add a brief note like "Gentleman shouted at us" or "Lady was pleasant but firmly requesed no future visits."
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon2">Street</span>
+            </div>
+            <input type="text" class="form-control" name="streetName" value="{{ street }}" placeholder="Enter street name" aria-label="streetName" aria-describedby="basic-addon2">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Map</span>
+            </div>
+            <input type="text" class="form-control" name="map" value="{{ mapNumber }}"placeholder="Enter map number" aria-label="map" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon4">Block</span>
+            </div>
+            <input type="text" class="form-control" name="block" value="{{ blockNumber }}"placeholder="Enter block number" aria-label="block" aria-describedby="basic-addon4">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon5">Name</span>
+            </div>
+            <input type="text" class="form-control" name="userName" value="" placeholder="Enter first name" aria-label="firstName" aria-describedby="basic-addon5" required>
+            <div class="invalid-feedback">
+              Please enter your first name.
+            </div>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <input type="hidden" name="action" value="dnc">
+        <input type="hidden" name="urlMap" value="{{ mapNumber}}">
+        <input type="hidden" name="urlBlock" value="{{ blockNumber}}">
+        <input type="hidden" name="urlStreet" value="{{ street|replace({' ' : '-' })}}">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-danger" name="addDnc">Add Do Not Call</button>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+

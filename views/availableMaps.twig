@@ -3,8 +3,11 @@
 	{% for map in availableMaps %}
 	  <li id="Map-{{ map.Map }}" class="list-group-item">
 	  	<a  href="?Map={{ map.Map }}" role="button">
-	  	  Map {{ map.Map }}	 
-	  	</a><span class="pl-5"><small class="text-muted">{{ map.Name }}</small></span>
+	  	  Map {{ map.Map }}
+	    <!--</a><span class="pl-5"><small class="text-muted">{{ map.Name }}</small></span>-->
+	    </a>
+	    <span class="badge badge-light ml-2">{{ map.Name }}</span>
+	    <span class="badge badge-pill badge-secondary ml-2">{{ map.toContact }}</span>
 	  	<div class="float-right"><span class="badge badge-{{ map.Colour }}">{{ map.Suburb }}</span></div>
 	  </li>
 	{% endfor %}

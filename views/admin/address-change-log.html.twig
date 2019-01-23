@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Address Change Log{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="../index.php">At Homes</a>
+  Admin
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">
+        {% if mapNumber %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {% if navbarFilter %}
+                 Hide Contacted
+               {% else %}
+                 Show All
+               {% endif %}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}">
+              Show All
+            </a>
+            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}&Filter=Contacted">
+              Hide Contacted
+            </a>
+          </div>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+        <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
+        </li> 
+        <li class="nav-item">
+        <a class="nav-link" href="../phone">Phone Calls</a>
+        </li>
+         <li class="nav-item">
+        <a class="nav-link" href="?Filter=out">Admin</a>
+        </li>
+         <li class="nav-item">
+        <a class="nav-link" href="s-13.php">S-13</a>
+        </li>
+      <!--
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="signout.php">Sign out</a>
+      </li>-->
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <!--<ul class="nav nav-tabs nav-fill">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Maps</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">People</a>
+  </li>
+</ul>-->
+
+<!-- Nav: map status types -->  
+ <ul class="nav">
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {% if Filter %}  
+        {{ Filter }}
+      {% else %}
+        All
+      {% endif %}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="?">
+          All
+        </a>
+        <a class="dropdown-item" href="?Filter=pending">
+          Pending
+        </a>
+        <a class="dropdown-item" href="?Filter=reviewed">
+          Reviewed
+        </a>
+        </div>
+    </div>
+  </li>
+</ul>
+
+{% if errorMessage %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ errorMessage }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>  
+{% endif %}
+
+<ul class="list-group">
+  {% for changeRequest in changeRequests %}
+      
+      <li class="list-group-item">
+        <a data-toggle="collapse" href="#collapse-{{ changeRequest.id }}" role="button" aria-expanded="false" aria-controls="collapse-{{ changeRequest.id }}">
+          {{ changeRequest.streetNumber }} {{ changeRequest.streetName }}
+        </a>
+        <span class="badge badge-pill badge-secondary">{{ changeRequest.action }}</span> {{ changeRequest.date }} 
+        
+        <div class="float-right">
+          {% if changeRequest.status == 'pending' %}
+            <span class="badge badge-pill badge-primary">{{ changeRequest.status }}</span>
+          {% endif %}
+        </div>
+        <div class="collapse" id="collapse-{{ changeRequest.id }}">
+          {% if changeRequest.note %}
+            <small><i>{{ changeRequest.note}}<br></i></small>
+          {% endif %}
+          Map {{ changeRequest.map }} Block {{ changeRequest.block }}<br>
+          Submitted by {{ changeRequest.firstName }}<br>
+          <div id="review-{{ changeRequest.id }}">
+            {% if changeRequest.status == 'reviewed' %}
+              Reviewed {{ changeRequest.approveDate}}<br>
+            {% else %}
+              <form action="address-change-approve.php" method="post">
+                <input type="hidden" name="id" value="{{ changeRequest.id }}">
+                <button type="submit" class="btn btn-outline-primary btn-sm btn-block mt-2" name="approve">Approve</button>
+              </form> 
+            {% endif %}
+          </div>
+        </div>
+      </li>
+  
+  {% endfor %}
+</ul>
+
+{% endblock %}
+

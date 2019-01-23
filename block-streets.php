@@ -8,9 +8,9 @@ $request->addFindCriterion('MapBlock::Block', $_GET['Block']);
 $result = $request->execute();
 $records = $result->getRecords();
 
-echo '<div class="list-group">';
+echo '<ul class="list-group">';
 foreach($records as $record) {
-    echo '<a href="index.php?Map=' . $_GET['Map'] . '&Block=' . $_GET['Block'] . '&Street=' . str_replace(' ', '-', $record->getfield('Street')) . '" class="list-group-item list-group-item-action">' . $record->getfield('Street') . '</a>';
+    echo '<li class="list-group-item"><a href="index.php?Map=' . $_GET['Map'] . '&Block=' . $_GET['Block'] . '&Street=' . str_replace(' ', '-', $record->getfield('Street')) . '">' . $record->getfield('Street') . '</a></li>';
 }
-echo '</div>';
+echo '</ul>';
 ?>

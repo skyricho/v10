@@ -20,6 +20,9 @@
           Block {{ mapBlock.Block }}
         </button>
         <span class="badge badge-pill badge-secondary">{{ mapBlock.blockToContact }}</span>
+        {% if mapBlock.isDone %}
+          <input type="checkbox" disabled checked>
+        {% endif %}
       </h5>
     </div>
 

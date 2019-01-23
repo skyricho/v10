@@ -1,6 +1,8 @@
 <?php
 include ("dbaccess.php"); 
 require 'vendor/autoload.php';
+//ini_set('display_errors', 1);
+
 
 $loader = new Twig_Loader_Filesystem('views');
 $twig = new Twig_Environment($loader);
@@ -61,7 +63,7 @@ if (isset($_GET['Block'])) {
     foreach($records as $record) {
         $mapBlocks[] = array(
             'Block' => $record->getField('Block'),
-            'blockToContact' => $record->getField('blockToContact'),
+            'blockToContact' => $record->getField('blockToContact')
         );
     }    
 
@@ -92,7 +94,8 @@ if (isset($_GET['Block'])) {
     foreach($records as $record) {
         $mapBlocks[] = array(
             'Block' => $record->getField('Block'),
-            'blockToContact' => $record->getField('blockToContact'),
+            //'blockToContact' => $record->getField('blockToContact'),
+            'isDone' => $record->getField('isDone')
         );
     }
 
@@ -115,6 +118,7 @@ if (isset($_GET['Block'])) {
             'Suburb' => $record->getField('MapSuburb::suburb'),
             'Colour' => $record->getField('Suburb::badgeColour'),
             'Name' => $record->getField('MapAssignment::cFirstName'),
+            //'toContact' => $record->getField('nhTotal'),
         );
     }
     
