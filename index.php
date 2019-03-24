@@ -107,7 +107,8 @@ if (isset($_GET['Block'])) {
 } else {
     $request = $fm->newFindCommand('Map');
     $request->addFindCriterion('mapAssignmentId', '*');
-    $request->addFindCriterion('isPhoneMap', 0);
+    $request->addFindCriterion('MapAssignment::coverageType', 'Campaign');
+    //$request->addFindCriterion('isPhoneMap', 0);
     $result = $request->execute();
     $records = $result->getRecords();
 
