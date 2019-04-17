@@ -105,19 +105,24 @@
 
 {% if availableMaps %}
   {% include 'availableMaps.twig' %}
-{% endif %} 	
+{% endif %} 
 
-{% if street %}
+{% if addresses %}
   <div class="text-center">
-      <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
-  </div>
+    <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
+  </div> 
   {% include 'addressList.twig' %}
+{% elseif blockNumber %}
+  <div class="text-center">
+    <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
+  </div>
+   {% include 'streetList.twig' %}
 {% elseif mapNumber %}
   <div class="text-center">
-      <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
+    <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div>
   {% include 'mapBlocks.twig' %}
 {% endif %} 
-
+    
 {% endblock %}
 
