@@ -1,17 +1,20 @@
-<!--<ul class="list-group">
+<ul class="list-group">
   {% for mapBlock in mapBlocks %}
-	<li id="Map-99-Block-88" class="list-group-item">
+	<li class="list-group-item">
 	  <a  href="?Map={{ mapNumber }}&Block={{ mapBlock.Block }}" role="button">
-	  Block {{ mapBlock.Block }}	 
+	    Block {{ mapBlock.Block }}	 
 	  </a>
+    {% if mapBlock.isDone %}
+      <input type="checkbox" disabled checked>
+    {% endif %}
 	  <div class="float-right">
-        <span class="badge badge-pill badge-secondary">{{ mapBlock.blockToContact }}</span>
+      <span class="badge badge-pill badge-secondary">{{ mapBlock.blockToContact }}</span>
 	  </div>
 	</li>
   {% endfor %}
-</ul>-->
+</ul>
 
-<div id="accordion">
+<!--<div id="accordion">
   {% for mapBlock in mapBlocks %}
   <div class="card">
     <div class="card-header" id="heading{{ mapBlock.Block }}">
@@ -31,4 +34,4 @@
     </div>
   </div>
   {% endfor %}
-</div>
+</div>-->
