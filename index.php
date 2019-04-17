@@ -1,20 +1,14 @@
 <?php
-$time = microtime();
-$time = explode(' ', $time);
-$time = $time[1] + $time[0];
-$start = $time;
-
 include ("dbaccess.php"); 
 require 'vendor/autoload.php';
 //ini_set('display_errors', 1);
-
 
 $loader = new Twig_Loader_Filesystem('views');
 $twig = new Twig_Environment($loader);
 $template = $twig->load('index.html.twig');
 
-if (isset($_GET['Block'])) {
-    # Query avaible addresses
+if (isset($_GET['Street'])) {
+    # Query available addresses
     $request = $fm->newFindCommand('AddressList');
     $request->addFindCriterion('Map', $_GET['Map']); 
     $request->addFindCriterion('Block', $_GET['Block']);
@@ -57,7 +51,7 @@ if (isset($_GET['Block'])) {
             'streetWithDash' => str_replace(' ', '-', $record->getfield('Street')),
         );   
     }
-
+    
     # Query available blocks
     $request = $fm->newFindCommand('MapBlock');
     $request->addFindCriterion('Map', $_GET['Map']); 
@@ -68,23 +62,62 @@ if (isset($_GET['Block'])) {
     foreach($records as $record) {
         $mapBlocks[] = array(
             'Block' => $record->getField('Block'),
-            'blockToContact' => $record->getField('blockToContact')
+            'blockToContact' => $record->getField('blockToContact'),
+            'isDone' => $record->getField('isDone')
         );
-    }    
-
+    }
+    
     # prepare variables for template
     echo $template->render(array(
-        'mapNumber' => $_GET['Map'],
-        'blockNumber' => $_GET['Block'],
-        'street' => str_replace('-', ' ', $_GET['Street']),
-        'streetWithDash' => $_GET['Street'],
-        #'availableMaps' => $availableMaps,
-        'mapBlocks' => $mapBlocks,
-        'addresses' => $addresses,
-        'streets' => $streets,
-        #'mapStreet' => 'quux',
-        'navbarFilter' => $_GET['Filter'],
-        'errorMessage' => $_GET['msg']
+            'navbarFilter' => $_GET['Filter'],
+            'addresses' => $addresses,
+            'street' => str_replace('-', ' ', $_GET['Street']),
+            'streetWithDash' => $_GET['Street'],
+            'streets' => $streets,       
+            'blockNumber' => $_GET['Block'],
+            'mapBlocks' => $mapBlocks,
+            'mapNumber' => $_GET['Map'],
+            'errorMessage' => $_GET['msg']
+        )
+    );
+
+} elseif (isset($_GET['Block'])) {
+    # Query available streets
+    $request = $fm->newFindCommand('BlockStreet');
+    $request->addFindCriterion('MapBlock::Map', $_GET['Map']);
+    $request->addFindCriterion('MapBlock::Block', $_GET['Block']); 
+    $result = $request->execute();
+    $records = $result->getRecords();
+
+    $streets = array();
+    foreach($records as $record) {
+        $streets[] = array(
+            'street' => $record->getfield('Street'),
+            'streetWithDash' => str_replace(' ', '-', $record->getfield('Street')),
+        );   
+    }
+    
+    # Query available blocks
+    $request = $fm->newFindCommand('MapBlock');
+    $request->addFindCriterion('Map', $_GET['Map']); 
+    $result = $request->execute();
+    $records = $result->getRecords();
+
+    $mapBlocks = array();
+    foreach($records as $record) {
+        $mapBlocks[] = array(
+            'Block' => $record->getField('Block'),
+            'blockToContact' => $record->getField('blockToContact'),
+            'isDone' => $record->getField('isDone')
+        );
+    }
+
+    echo $template->render(array(
+            'streets' => $streets,       
+            'blockNumber' => $_GET['Block'],
+            'mapBlocks' => $mapBlocks,
+            'mapNumber' => $_GET['Map'],
+            'errorMessage' => $_GET['msg']
         )
     );
 
@@ -105,10 +138,12 @@ if (isset($_GET['Block'])) {
     }
 
     echo $template->render(array(
-         'mapNumber' => $_GET['Map'],
-         'mapBlocks' => $mapBlocks,
+            'mapBlocks' => $mapBlocks,
+            'mapNumber' => $_GET['Map'],
+            'errorMessage' => $_GET['msg']
         )
     );
+
 } else {
     $request = $fm->newFindCommand('Map');
     $request->addFindCriterion('mapAssignmentId', '*');
@@ -129,16 +164,10 @@ if (isset($_GET['Block'])) {
     
     echo $template->render(array(
         'availableMaps' => $availableMaps,
+        'errorMessage' => $_GET['msg']
         )
     );
 
 }
-
-$time = microtime();
-$time = explode(' ', $time);
-$time = $time[1] + $time[0];
-$finish = $time;
-$total_time = round(($finish - $start), 4);
-echo 'Page generated in '.$total_time.' seconds.';
 
 ?>
