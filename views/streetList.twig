@@ -1,0 +1,27 @@
+<!-- Nav: block, street and filter -->  
+<ul class="nav">
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Block {{ blockNumber}}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      {% for mapBlock in mapBlocks %}
+        <a class="dropdown-item" href="index.php?Map={{ mapNumber }}&Block={{ mapBlock.Block }}">
+          Block {{ mapBlock.Block }} [{{ mapBlock.blockToContact }}] 
+        </a>
+      {% endfor %} 
+        </div>
+    </div>
+  </li>
+</ul>
+
+<ul class="list-group">
+  {% for street in streets %}
+    <li class="list-group-item">
+      <a href="index.php?Map={{ mapNumber }}&Block={{ blockNumber }}&Street={{ street.streetWithDash }}">
+        {{ street.street }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
