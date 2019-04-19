@@ -27,7 +27,10 @@ foreach($records as $record) {
 
 echo '<div class="card my-3">
         <div class="card-body">
-        <h5>Coverage <span class="badge badge-primary">' . $Coverage . '%</span></h6>
+          <h5>Coverage</h5>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: ' . $Coverage . '%;" aria-valuenow="' . $Coverage . '" aria-valuemin="0" aria-valuemax="100">' . $Coverage . '%</div>
+          </div>
           <ul class="list-unstyled">
             <li>Houses: ' . $SingleDwellingAH . ' of ' . $SingleDwelling . '</li>
             <li>Units: ' . $MultiDwellingAH . ' of ' . $MultiDwelling . '</li>';
