@@ -149,22 +149,28 @@ if (isset($_GET['Street'])) {
     $request->addFindCriterion('mapAssignmentId', '*');
     $request->addFindCriterion('isPhoneMap', 0);
     $result = $request->execute();
-    $records = $result->getRecords();
 
-    $availableMaps = array();
-    foreach($records as $record) {
-        $availableMaps[] = array(
-            'Map' => $record->getField('Map'),
-            'Suburb' => $record->getField('MapSuburb::suburb'),
-            'Colour' => $record->getField('Suburb::badgeColour'),
-            'Name' => $record->getField('MapAssignment::cFirstName'),
-            //'toContact' => $record->getField('nhTotal'),
-        );
+    # Trap for errors
+    if (FileMaker::isError($result)) {
+        $errorMessage = $result->getMessage();
+    } else {
+        $records = $result->getRecords();
+
+        $availableMaps = array();
+        foreach($records as $record) {
+            $availableMaps[] = array(
+                'Map' => $record->getField('Map'),
+                'Suburb' => $record->getField('MapSuburb::suburb'),
+                'Colour' => $record->getField('Suburb::badgeColour'),
+                'Name' => $record->getField('MapAssignment::cFirstName'),
+                //'toContact' => $record->getField('nhTotal'),
+            );
+        }
     }
     
     echo $template->render(array(
         'availableMaps' => $availableMaps,
-        'errorMessage' => $_GET['msg']
+        'errorMessage' => $errorMessage
         )
     );
 
