@@ -20,21 +20,27 @@ if (isset($_GET['Street'])) {
     $request->addFindCriterion('isHome', $fmfilter);
     $request->addSortRule('cNumber', 1);
     $result = $request->execute();
-    $records = $result->getRecords();
 
-    $addresses = array();
-    foreach($records as $record) {
-        $addresses[] = array(
-            'recID' => $record->getField('recID'),
-            'cStatus' => $record->getField('cStatus'),
-            'modDate' => $record->getField('modDate'),
-            'streetNumber' => $record->getField('Number'),
-            'streetName' => $record->getField('Street'),
-            'streetNameWithDash' => str_replace(' ', '-', $record->getfield('Street')),
-            'description' => $record->getField('Address Description'),
-            'cUnitsCount' => $record->getField('cUnitsCount'),
-            'UnitsNH' => $record->getField('Units NH'),
-        );
+    # Trap for errors
+    if (FileMaker::isError($result)) {
+        $errorMessage = $result->getMessage();
+    } else {
+        $records = $result->getRecords();
+
+        $addresses = array();
+        foreach($records as $record) {
+            $addresses[] = array(
+                'recID' => $record->getField('recID'),
+                'cStatus' => $record->getField('cStatus'),
+                'modDate' => $record->getField('modDate'),
+                'streetNumber' => $record->getField('Number'),
+                'streetName' => $record->getField('Street'),
+                'streetNameWithDash' => str_replace(' ', '-', $record->getfield('Street')),
+                'description' => $record->getField('Address Description'),
+                'cUnitsCount' => $record->getField('cUnitsCount'),
+                'UnitsNH' => $record->getField('Units NH'),
+            );
+        }
     }
 
     # Query available streets
@@ -77,7 +83,7 @@ if (isset($_GET['Street'])) {
             'blockNumber' => $_GET['Block'],
             'mapBlocks' => $mapBlocks,
             'mapNumber' => $_GET['Map'],
-            'errorMessage' => $_GET['msg']
+            'errorMessage' => $errorMessage
         )
     );
 
