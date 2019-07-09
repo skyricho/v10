@@ -40,7 +40,7 @@ $record = $fm->getRecordByID("AddressList", $_POST["id"]);
           </a>
     <div class="float-right"><!--<small><i>At home ' . $newformat . '</i></small>-->
       <div class="collapse" id="revert-' . $record->getField('recID') .'">
-        <button onclick="updateAtHome(' . $record->getField('recID') . ',)" id="' . $record->getField('recID') . '" class="btn btn-outline-primary btn-sm">Clear at home date</button>
+        <button onclick="updateAtHome(' . $record->getField('recID') . ',)" id="' . $record->getField('recID') . '" class="btn btn-outline-danger btn-sm">Not At Home</button>
       </div>
     </div>';
      }
