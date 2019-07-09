@@ -6,7 +6,7 @@
 		    Unit {{ housing_unit.Number }}
 		  </a>
 		  <div class="float-right">
-			  <small><i>At home {{ housing_unit.Date|date("D d M") }}</i></small>
+			  <!--<small><i>At home {{ housing_unit.Date|date("D d M") }}</i></small>-->
 			  <div class="collapse" id="revert-unit-{{ housing_unit.unitID }}">
 			    <button onclick="updateHousingUnit('{{ housing_unit.unitID }}', '', '', '{{ streetNumber }}-unit-{{ housing_unit.Number }}')" class="btn btn-outline-secondary btn-sm">
 			      Clear at home date

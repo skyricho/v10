@@ -38,7 +38,7 @@ $record = $fm->getRecordByID("AddressList", $_POST["id"]);
       echo '<a data-toggle="collapse" href="#revert-' . $record->getField('recID') . '" role="button" aria-expanded="false" aria-controls="revert-' . $record->getField('recID') . '">
           ' . $record->getField('cNumberStreetLabel') . '
           </a>
-    <div class="float-right"><small><i>At home ' . $newformat . '</i></small>
+    <div class="float-right"><!--<small><i>At home ' . $newformat . '</i></small>-->
       <div class="collapse" id="revert-' . $record->getField('recID') .'">
         <button onclick="updateAtHome(' . $record->getField('recID') . ',)" id="' . $record->getField('recID') . '" class="btn btn-outline-primary btn-sm">Clear at home date</button>
       </div>
