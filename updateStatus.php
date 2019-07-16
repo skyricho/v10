@@ -16,7 +16,9 @@ if (isset($_POST['id'])) {
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" ic-target="#' . $_POST['id'] . '" ic-confirm="Are you sure?" checked>
               <label class="form-check-label text-muted" for="defaultCheck1">' . 
-                $_POST['streetNumber'] . ' ' . $_POST['streetName'] . '<span id="' . $_POST['id'] . '-visitDate" class="ml-3 badge-pill badge-light"><small><i>' . date("D j M") . '</i></small></span>';
+                $_POST['streetNumber'] . ' ' . $_POST['streetName'];
+                # Hide visited date
+                //<span id="' . $_POST['id'] . '-visitDate" class="ml-3 badge-pill badge-light"><small><i>' . date("D j M") . '</i></small></span>
     if (empty($_POST['addressDescription'])) {
       echo '';
     } else {

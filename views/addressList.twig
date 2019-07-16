@@ -67,9 +67,10 @@
               <label class="form-check-label" for="defaultCheck1">
               <div class="text-muted">
                 {{ address.streetNumber }} {{ address.streetName }}
-                <span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
+                <!-- hide visted date -->
+                <!--<span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
                   <small><i>{{ address.modDate|date("D d M") }}</i></small>
-                </span>
+                </span>-->
                 {% if address.description  %}
                   </br><small class="text-muted">{{ address.description|raw }}</small>
                 {% endif %}
