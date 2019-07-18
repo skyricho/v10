@@ -78,10 +78,24 @@
 			  <div class="card-header">
 			    Assign
 			    <div class="float-right">
-			      <form action="map.php" method="POST">
-				    <input type="hidden" name="id" value="{{ map.id }}">
-				    <input class="btn btn-outline-secondary btn-sm" type="submit" name="deactivate" value="Deactivate">
-				  </form>
+			      <div class="btn-group">
+					  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    Actions
+					  </button>
+					  <div class="dropdown-menu dropdown-menu-right">
+					    <form action="map.php" method="POST">
+						    <input type="hidden" name="id" value="{{ map.id }}">
+						    <input class="dropdown-item" type="submit" name="deactivate" value="Deactivate">
+						</form>
+
+					    <form ic-post-to="map-reset.php" ic-confirm="Are you sure?" ic-target="#alert-{{ map.id }}">
+						  	<input type="hidden" name="Map" value="{{ map.Map }}">
+						  	<input class="dropdown-item" type="submit" name="map-reset" value="Reset At Homes">
+  					     </form>
+				       </div>
+					</div>
+			      	
+				
 			    </div>
 			  </div>
 			  <div class="card-body">
@@ -119,10 +133,6 @@
 					</div>
 					
 					<input class="btn btn-outline-primary btn-block" type="submit" name="assign" value="Assign Map">
-				  </form>
-				  <form ic-post-to="map-reset.php" ic-confirm="Are you sure?" ic-target="#alert-{{ map.id }}">
-				  	<input type="hidden" name="Map" value="{{ map.Map }}">
-				  	<input class="btn btn-outline-danger btn-block mt-2" type="submit" name="map-reset" value="Reset At Homes">
 				  </form>
 				</div>
 			</div>
