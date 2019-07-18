@@ -119,7 +119,11 @@
 					</div>
 					
 					<input class="btn btn-outline-primary btn-block" type="submit" name="assign" value="Assign Map">
-				  </form>  
+				  </form>
+				  <form ic-post-to="map-reset.php" ic-confirm="Are you sure?" ic-target="#alert-{{ map.id }}">
+				  	<input type="hidden" name="Map" value="{{ map.Map }}">
+				  	<input class="btn btn-outline-danger btn-block mt-2" type="submit" name="map-reset" value="Reset At Homes">
+				  </form>
 				</div>
 			</div>
           
