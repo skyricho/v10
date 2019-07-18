@@ -78,10 +78,21 @@
 			  <div class="card-header">
 			    Assign
 			    <div class="float-right">
-			      <form action="map.php" method="POST">
-				    <input type="hidden" name="id" value="{{ map.id }}">
-				    <input class="btn btn-outline-secondary btn-sm" type="submit" name="deactivate" value="Deactivate">
-				  </form>
+			      <div class="dropdown">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    Actions
+					  </button>
+					  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+					    <form action="map.php" method="POST">
+						  <input type="hidden" name="id" value="{{ map.id }}">
+						  <input class="dropdown-item" type="submit" name="deactivate" value="Deactivate">
+						</form>
+						<form ic-post-to="map-reset.php" ic-confirm="Are you sure?" ic-target="#alert-{{ map.id }}">
+						  <input type="hidden" name="Map" value="{{ map.Map }}">
+						  <input class="dropdown-item" type="submit" name="map-reset" value="Reset At Homes">
+				        </form>
+					  </div>
+				  </div>
 			    </div>
 			  </div>
 			  <div class="card-body">
@@ -119,7 +130,11 @@
 					</div>
 					
 					<input class="btn btn-outline-primary btn-block" type="submit" name="assign" value="Assign Map">
+<<<<<<< Updated upstream
 				  </form>  
+=======
+				  </form>
+>>>>>>> Stashed changes
 				</div>
 			</div>
           
@@ -138,7 +153,7 @@
 		      Map
 		    </div>
 		    <div class="card-body">
-		      <img src="http://skyricho.github.io/img/maps/{{ map.Map }}.jpg" class="img-fluid" alt="Map {{ map.Map }}">
+		      <img src="https://skyricho.github.io/img/maps/{{ map.Map }}.jpg" class="img-fluid" alt="Map {{ map.Map }}">
 		      <!--<div class="text-center">
                 <img src="http://skyricho.github.io/img/maps/{{ map.Map }}.jpg" class="img-fluid" alt="Map {{ map.Map }}">-->
               </div>
