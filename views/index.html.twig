@@ -13,25 +13,6 @@
 
   <div class="navbar-collapse collapse" id="navbarsExample01" style="">
     <ul class="navbar-nav mr-auto">
-        {% if mapNumber %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             {% if navbarFilter %}
-                 Hide Contacted
-               {% else %}
-                 Show All
-               {% endif %}
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}">
-              Show All
-            </a>
-            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}&Filter=Contacted">
-              Hide Contacted
-            </a>
-          </div>
-        </li>
-        {% endif %}
         <li class="nav-item">
         <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
         </li> 
@@ -109,17 +90,17 @@
 
 {% if addresses %}
   <div class="text-center">
-    <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
+    <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div> 
   {% include 'addressList.twig' %}
 {% elseif blockNumber %}
   <div class="text-center">
-    <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
+    <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div>
    {% include 'streetList.twig' %}
 {% elseif mapNumber %}
   <div class="text-center">
-    <img src="http://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
+    <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div>
   {% include 'mapBlocks.twig' %}
 {% endif %} 
