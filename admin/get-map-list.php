@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-include ("dbaccess.php");
+include ("../dbaccess.php");
 
 
 $request = $fm->newFindCommand('Map');
