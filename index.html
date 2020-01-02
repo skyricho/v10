@@ -23,7 +23,7 @@
               for (var key in JSONObject) {
                 if (JSONObject.hasOwnProperty(key)) {
                   mapListHTML += "<li class=\"list-group-item\">";
-                    mapListHTML += "<a href=\"foo?Map=" + JSONObject[key]["map"] + "\">Map " + JSONObject[key]["map"] + "</a>";
+                    mapListHTML += "<a href=\"block-list.html?map=" + JSONObject[key]["map"] + "\">Map " + JSONObject[key]["map"] + "</a>";
                     mapListHTML += "<span class=\"badge badge-light ml-2\">" + JSONObject[key]["firstName"] + "</span>";
                     mapListHTML += "<div class=\"float-right\"><span class=\"badge badge-" + JSONObject[key]["colour"] + "\">" + JSONObject[key]["suburb"] + "</span></div>";
                   mapListHTML += "</li>";
