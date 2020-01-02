@@ -3,7 +3,7 @@
 {% block title %}Map {{ mapNumber}} | Block {{ blockNumber }} | {{ street }}{% endblock %}
 
 {% block Navbar %}
-  <a class="navbar-brand" href="index.php">At Homes</a>
+  <a class="navbar-brand" href="index.html">At Homes</a>
   {% if mapNumber %}
   <button onclick="loadMapDetails({{ mapNumber }})" class="nav-link btn btn-outline-light" data-toggle="collapse" href="#map-{{ mapNumber }}-info" role="button" aria-expanded="false" aria-controls="map-{{ mapNumber }}-info" ic-get-from="mapDetails.php?Map={{ mapNumber }}" ic-target="#mapDetails">Map {{ mapNumber }}</button>
   {% endif %}
@@ -97,6 +97,43 @@
     <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div> 
   
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var JSONObject = JSON.parse(this.responseText);
+        
+        var mapNumber = "{{ mapNumber }}";
+        var blockNumber = "{{blockNumber }}";
+
+        var blockListHTML = "";
+        // Loop through Object and create peopleHTML
+        for (var key in JSONObject[parseInt(mapNumber) - 1][1]) {      
+          if (JSONObject.hasOwnProperty(key)) {
+            
+              blockListHTML += "<a class=\"dropdown-item\" href=\"street-list.html?map=" + mapNumber + "&block=" + JSONObject[parseInt(mapNumber) - 1][1][key] + "\">Block " + JSONObject[parseInt(mapNumber) - 1][1][key] + "</a>";
+          }
+
+        }
+
+        document.getElementById("block-list").innerHTML = blockListHTML;
+
+        var streetListHTML = "";
+        // Loop through Object and create peopleHTML
+        for (var key in JSONObject[mapNumber - 1][2][parseInt(blockNumber) - 1]) {
+          if (JSONObject.hasOwnProperty(key)) {
+            streetListHTML += "<a class=\"dropdown-item\" href=\"street.php?map=" + mapNumber + "&block=" + blockNumber + "&street=" + JSONObject[parseInt(mapNumber) - 1][2][parseInt(blockNumber) - 1][key].replace(" ", "-") + "\">" + JSONObject[parseInt(mapNumber) - 1][2][parseInt(blockNumber) - 1][key] + "</a>"
+          }
+        }
+
+        document.getElementById("street-list").innerHTML = streetListHTML;  
+
+      }  
+    };
+    xmlhttp.open("GET", "map-data.json", true);
+    xmlhttp.send();
+  </script>
+
   <!-- Nav: block, street and filter -->  
  <ul class="nav">
   <li class="nav-item">
@@ -104,13 +141,7 @@
       <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Block {{ blockNumber}}
       </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      {% for mapBlock in mapBlocks %}
-        <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{ mapBlock.Block }}&Filter={{ Filter }}">
-          Block {{ mapBlock.Block }} [{{ mapBlock.blockToContact }}] 
-        </a>
-      {% endfor %} 
-        </div>
+      <div id="block-list" class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
     </div>
   </li>
   <li class="nav-item">
@@ -122,13 +153,7 @@
              Street
           {% endif %}
       </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      {% for street in streets %}
-        <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{ blockNumber }}&Street={{ street.streetWithDash }}&Filter={{ Filter }}">
-          {{ street.street }}
-        </a>
-      {% endfor %} 
-        </div>
+      <div id="street-list" class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
     </div>
   </li>
 </ul>
