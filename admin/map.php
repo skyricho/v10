@@ -114,6 +114,7 @@ if (isset($_POST['deactivate'])) {
 
 }
  
+include ("../get-map-list.php"); 
 
 # Debug form
 /*
