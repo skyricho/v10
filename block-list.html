@@ -53,6 +53,7 @@
               }
 
             document.getElementById("block-list").innerHTML = blockListHTML;
+            document.getElementById("map-image").src = "https://skyricho.github.io/img/maps/" + mapNumber + ".jpg";
 
 
             }
@@ -71,6 +72,9 @@
     </header>
 
     <main role="main">
+      <div class="text-center">
+        <img id="map-image" src="" class="img-fluid">
+      </div> 
       <ul id="block-list" class="list-group"></ul>
     </main>
 
