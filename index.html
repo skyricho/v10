@@ -22,11 +22,13 @@
               // Loop through Object and create peopleHTML
               for (var key in JSONObject) {
                 if (JSONObject.hasOwnProperty(key)) {
-                  mapListHTML += "<li class=\"list-group-item\">";
-                    mapListHTML += "<a href=\"block-list.html?map=" + JSONObject[key]["map"] + "\">Map " + JSONObject[key]["map"] + "</a>";
-                    mapListHTML += "<span class=\"badge badge-light ml-2\">" + JSONObject[key]["firstName"] + "</span>";
-                    mapListHTML += "<div class=\"float-right\"><span class=\"badge badge-" + JSONObject[key]["colour"] + "\">" + JSONObject[key]["suburb"] + "</span></div>";
-                  mapListHTML += "</li>";
+                  mapListHTML += "<a class=\"list-group-item\" href=\"block-list.html?map=" + JSONObject[key]["map"] + "\">";
+                    mapListHTML += "<div class=\"row\">";
+                      mapListHTML += "<div class=\"col text-decoration-none text-dark\">Map " + JSONObject[key]["map"] + "</div>";
+                      mapListHTML += "<div class=\"col text-left\"><span class=\"badge badge-light\">" + JSONObject[key]["firstName"] + "</span></div>";
+                      mapListHTML += "<div class=\"col-5 text-right\"><span class=\"badge badge-" + JSONObject[key]["colour"] + "\">" + JSONObject[key]["suburb"] + "</span></div>";
+                    mapListHTML += "</div>";
+                  mapListHTML += "</a>";
                 }
               }
 
@@ -46,8 +48,8 @@
     </header>
 
     <main role="main">
-      <ul id="map-list" class="list-group"></ul>
-    </main>
+      <div id="map-list" class="list-group">
+      </div>
 
     <footer class="text-muted bg-light py-2">
         <p class="text-center">
