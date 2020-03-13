@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  
+      <title>Block list</title>
+
+      <script>
+          function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+          }
+
+          //var number = getUrlVars()["x"];
+          //var mytext = getUrlVars()["text"];
+
+          function getUrlParam(parameter, defaultvalue){
+            var urlparameter = defaultvalue;
+            if(window.location.href.indexOf(parameter) > -1){
+                urlparameter = getUrlVars()[parameter];
+                }
+            return urlparameter;
+          }
+
+
+          var mapNumber = getUrlParam('map','Empty');
+          //console.log(mapNumber);
+          
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var JSONObject = JSON.parse(this.responseText);
+            
+
+            var blockListHTML = "";
+
+              // Loop through Object and create peopleHTML
+              for (var key in JSONObject[mapNumber - 1][1]) {
+                if (JSONObject.hasOwnProperty(key)) {
+                  blockListHTML += "<li class=\"list-group-item\">";
+                    blockListHTML += "<a href=\"street-list.html?map=" + mapNumber + "&block=" + JSONObject[mapNumber - 1][1][key] + "\">Block " + JSONObject[mapNumber - 1][1][key] + "</a>";
+                  blockListHTML += "</li>";
+                }
+              }
+
+            document.getElementById("block-list").innerHTML = blockListHTML;
+            document.getElementById("map-image").src = "https://skyricho.github.io/img/maps/" + mapNumber + ".jpg";
+
+
+            }
+        };
+        xmlhttp.open("GET", "map-data.json", true);
+        xmlhttp.send();
+      </script>
+  </head>
+  <body>
+     <header>
+       <nav class="navbar navbar-dark bg-secondary">
+         <a class="navbar-brand" href="index.html">At Homes</a>
+         <button id="mapNumber" class="nav-link btn btn-outline-light" href="#" role="button"></button>
+         <p class="text-secondary">foo</p>
+      </nav>
+    </header>
+
+    <main role="main">
+      <div class="text-center">
+        <img id="map-image" src="" class="img-fluid">
+      </div> 
+      <ul id="block-list" class="list-group"></ul>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+      document.getElementById("mapNumber").innerHTML = "Map " + mapNumber;
+      document.title = "Map " + mapNumber + " | Block list";
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>

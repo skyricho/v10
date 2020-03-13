@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% block title %}Map {{ mapNumber}} | Block {{ blockNumber }} | {{ street }}{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="index.html">At Homes</a>
+  {% if mapNumber %}
+  <button onclick="loadMapDetails({{ mapNumber }})" class="nav-link btn btn-outline-light" data-toggle="collapse" href="#map-{{ mapNumber }}-info" role="button" aria-expanded="false" aria-controls="map-{{ mapNumber }}-info" ic-get-from="mapDetails.php?Map={{ mapNumber }}" ic-target="#mapDetails">Map {{ mapNumber }}</button>
+  {% endif %}
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Address correction
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#exampleModal1" data-toggle="modal" data-target="#exampleModal1">Add address</a>
+          <a class="dropdown-item" href="#exampleModal2" data-toggle="modal" data-target="#exampleModal2">Delete address</a>
+          <a class="dropdown-item" href="#exampleModal3" data-toggle="modal" data-target="#exampleModal3">Add DNC</a>
+        </div>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
+      </li> 
+       <li class="nav-item">
+      <a class="nav-link" href="admin/?Filter=assigned">Admin</a>
+      </li> 
+      <!--
+      <li class="nav-item">
+        <a class="nav-link" href="phone">Phone Calls</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="admin/s-13.php">S-13</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="admin/address-change-log.php">Change Log</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="signout.php">Sign out</a>
+      </li>-->
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+	<!-- Map image and info -->
+	<div class="collapse" id="map-{{ mapNumber }}-info">
+
+    <div class="container">
+
+    <div id"mapDetails"></div>
+
+
+      <div class="card">
+        <div class="card-body" id="mapDetails">
+        </div>
+      </div>
+
+      <div id="{{ mapNumber }}-history"></div>
+
+    </div>
+
+      <script>
+        function loadMapDetails(Map) {
+        //  alert("hello world!");
+        //  alert("hello Map " + Map);
+          $.get("mapDetails.php",
+                {
+                  Map: Map,
+        //        Filter: Filter
+                },
+                function(data,status){
+                    var e1 = (data);
+        //            alert(e1);
+                    document.getElementById("mapDetails").innerHTML = e1;
+                });    
+ 
+        }
+        </script>
+  </div>
+
+{% if errorMessage %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ errorMessage }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>  
+{% endif %} 	
+
+{% if addresses %}
+  <div class="text-center">
+    <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
+  </div> 
+  
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var JSONObject = JSON.parse(this.responseText);
+        
+        var mapNumber = "{{ mapNumber }}";
+        var blockNumber = "{{blockNumber }}";
+
+        var blockListHTML = "";
+        // Loop through Object and create peopleHTML
+        for (var key in JSONObject[parseInt(mapNumber) - 1][1]) {      
+          if (JSONObject.hasOwnProperty(key)) {
+            
+              blockListHTML += "<a class=\"dropdown-item\" href=\"street-list.html?map=" + mapNumber + "&block=" + JSONObject[parseInt(mapNumber) - 1][1][key] + "\">Block " + JSONObject[parseInt(mapNumber) - 1][1][key] + "</a>";
+          }
+
+        }
+
+        document.getElementById("block-list").innerHTML = blockListHTML;
+
+        var streetListHTML = "";
+        // Loop through Object and create peopleHTML
+        for (var key in JSONObject[mapNumber - 1][2][parseInt(blockNumber) - 1]) {
+          if (JSONObject.hasOwnProperty(key)) {
+            streetListHTML += "<a class=\"dropdown-item\" href=\"street.php?map=" + mapNumber + "&block=" + blockNumber + "&street=" + JSONObject[parseInt(mapNumber) - 1][2][parseInt(blockNumber) - 1][key].replace(" ", "-") + "\">" + JSONObject[parseInt(mapNumber) - 1][2][parseInt(blockNumber) - 1][key] + "</a>"
+          }
+        }
+
+        document.getElementById("street-list").innerHTML = streetListHTML;  
+
+      }  
+    };
+    xmlhttp.open("GET", "map-data.json", true);
+    xmlhttp.send();
+  </script>
+
+  <!-- Nav: block, street and filter -->  
+ <ul class="nav">
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Block {{ blockNumber}}
+      </a>
+      <div id="block-list" class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
+    </div>
+  </li>
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if street %}
+             {{ street }}
+          {% else %}
+             Street
+          {% endif %}
+      </a>
+      <div id="street-list" class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
+    </div>
+  </li>
+</ul>
+
+
+{% include 'modal-forms.twig' %}
+
+<ul class="list-group">
+  {% for address in addresses %}
+    {% if address.cStatus == 'ah' %}
+      <!-- Contacted -->
+      <li id="{{ address.recID }}" class="list-group-item">
+        <div class="background-color: red;">
+          <form id="{{ address.recID }}-form">
+            <input type="hidden" name="id" value="{{ address.recID }}">
+            <input type="hidden" name="notHome" value="">
+            <input type="hidden" name="streetNumber" value="{{ address.streetNumber }}">
+            <input type="hidden" name="streetName" value="{{ address.streetName }}">
+            <input type="hidden" name="addressDescription" value="{{ address.description|raw }}">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" ic-target="#{{ address.recID }}" ic-confirm="Are you sure?" checked>
+              <label class="form-check-label" for="defaultCheck1">
+              <div class="text-muted">
+                {{ address.streetNumber }} {{ address.streetName }}
+                <!-- hide visted date -->
+                <!--<span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
+                  <small><i>{{ address.modDate|date("D d M") }}</i></small>
+                </span>-->
+                {% if address.description  %}
+                  </br><small class="text-muted">{{ address.description|raw }}</small>
+                {% endif %}
+              </div>
+            </label>
+            </div>
+          </form>
+        </div>
+      </li>
+    {% elseif address.cStatus == 'DNC' %}
+      <!-- DNC -->
+      <li id="{{ address.recID }}" class="list-group-item " > <!-- option: list-group-item-danger -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" disabled>
+          <label class="form-check-label" for="defaultCheck1">
+            <span class="badge badge-danger">DNC</span> {{ address.streetNumber }} {{ address.streetName }}
+            {% if address.description  %}
+              </br><small class="text-muted">{{ address.description|raw }}</small>
+            {% endif %}
+          </label>
+        </div>
+      </li> 
+    {% elseif address.cStatus == 'HousingUnits' %}
+      <!-- Housing Units -->
+      <li id="{{ address.recID }}" class="list-group-item list-group-item-primary">
+        <a ic-get-from="HousingUnits.php?id={{ address.recID }}" ic-target="#{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units" href="#{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units">
+          {{ address.streetNumber }} {{ address.streetName }}
+        </a>
+        <span class="badge badge-light">{{ address.cUnitsCount }} units</span>
+        <span class="badge badge-pill badge-secondary">{{ address.UnitsNH }}</span>
+      </li>
+      <div class="collapse" id="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units"></div>
+    {% else %}
+       <!-- Default: Not contacted yet -->
+       <li id="{{ address.recID }}" class="list-group-item">
+          <form id="{{ address.recID }}-form">
+            <input type="hidden" name="id" value="{{ address.recID }}">
+            <input type="hidden" name="isHome" value="">
+            <input type="hidden" name="streetNumber" value="{{ address.streetNumber }}">
+            <input type="hidden" name="streetName" value="{{ address.streetName }}">
+            <input type="hidden" name="addressDescription" value="{{ address.description|raw }}">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" 
+          ic-target="#{{ address.recID }}">
+              <label class="form-check-label" for="defaultCheck1">
+                {{ address.streetNumber }} {{ address.streetName }}
+                {% if address.description  %}
+                  </br><small class="text-muted">{{ address.description|raw }}</small>
+                {% endif %}
+              </label>
+             </div>
+          </form>
+        </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+
+        
+{% endif %} 
+    
+{% endblock %}
+
