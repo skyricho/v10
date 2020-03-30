@@ -140,6 +140,7 @@ if (isset($_GET['Street'])) {
         foreach($records as $record) {
             $availableMaps[] = array(
                 'Map' => $record->getField('Map'),
+                'Name' => $record->getField('MapAssignment::cFirstName'),
                 'Suburb' => $record->getField('MapSuburb::suburb'),
                 'Colour' => $record->getField('Suburb::badgeColour'),
             );
