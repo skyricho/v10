@@ -1,4 +1,8 @@
 <?php
+header("Location: phone/");
+die();
+
+/*
 include ("dbaccess.php"); 
 require 'vendor/autoload.php';
 //ini_set('display_errors', 1);
@@ -181,5 +185,5 @@ if (isset($_GET['Street'])) {
     );
 
 }
-
+*/
 ?>
