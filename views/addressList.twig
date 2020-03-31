@@ -98,8 +98,8 @@
         <a ic-get-from="HousingUnits.php?id={{ address.recID }}" ic-target="#{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units" href="#{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units">
           {{ address.streetNumber }} {{ address.streetName }}
         </a>
-        <span class="badge badge-light">{{ address.cUnitsCount }} units</span>
-        <span class="badge badge-pill badge-secondary">{{ address.UnitsNH }}</span>
+        <span class="badge badge-light ml-1"><i class="far fa-building"></i> {{ address.cUnitsCount }} units</span>
+        <span class="badge badge-pill badge-secondary ml-1">{{ address.UnitsNH }}</span>
       </li>
       <div class="collapse" id="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units"></div>
     {% else %}
