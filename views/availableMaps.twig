@@ -2,12 +2,26 @@
   <ul class="list-group">
 	{% for map in availableMaps %}
 	  <li id="Map-{{ map.Map }}" class="list-group-item">
-	  	<a  href="?Map={{ map.Map }}" role="button">
-	  	  Map {{ map.Map }}
+	  	{% if map.coverageType == 'Phone' %}
+	  	  <a  href="phone/?Map={{ map.Map }}" role="button">
+	  	    Map {{ map.Map }}
 	    <!--</a><span class="pl-5"><small class="text-muted">{{ map.Name }}</small></span>-->
-	    </a>
+	      </a>
+	    {% else %}
+	      <a  href="?Map={{ map.Map }}" role="button">
+	  	    Map {{ map.Map }}
+	    <!--</a><span class="pl-5"><small class="text-muted">{{ map.Name }}</small></span>-->
+	      </a>
+	    {% endif %}
 	    <span class="badge badge-light ml-2">{{ map.Name }}</span>
 	    <span class="badge badge-pill badge-secondary ml-2">{{ map.toContact }}</span>
+	    <span class="ml-1">
+	      {% if map.coverageType == 'Phone' %}
+	      	<i class="fas fa-phone-square"></i>
+	      {% else %}
+	      	<i class="fas fa-envelope"></i>
+	      {% endif %}
+	    </span>
 	  	<div class="float-right"><span class="badge badge-{{ map.Colour }}">{{ map.Suburb }}</span></div>
 	  </li>
 	{% endfor %}

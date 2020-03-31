@@ -153,7 +153,7 @@ if (isset($_GET['Street'])) {
 } else {
     $request = $fm->newFindCommand('Map');
     $request->addFindCriterion('mapAssignmentId', '*');
-    $request->addFindCriterion('isPhoneMap', 0);
+    //$request->addFindCriterion('isPhoneMap', 0);
     $result = $request->execute();
 
     # Trap for errors
@@ -169,6 +169,8 @@ if (isset($_GET['Street'])) {
                 'Suburb' => $record->getField('MapSuburb::suburb'),
                 'Colour' => $record->getField('Suburb::badgeColour'),
                 'Name' => $record->getField('MapAssignment::cFirstName'),
+                'coverageType' => $record->getField('MapAssignment::coverageType'),
+
                 //'toContact' => $record->getField('nhTotal'),
             );
         }
