@@ -3,8 +3,8 @@
 {% block title %}At Homes{% endblock %}
 
 {% block Navbar %}
-  <a class="navbar-brand" href="index.php">
-    <img src="../img/telephone.svg" width="30" height="30" alt="">
+  <a class="navbar-brand" href="../index.php">
+    At Homes
   </a>
   {% if mapNumber %}
   <button onclick="loadMapDetails({{ mapNumber }})" class="nav-link btn btn-outline-light" data-toggle="collapse" href="#map-{{ mapNumber }}-info" role="button" aria-expanded="false" aria-controls="map-{{ mapNumber }}-info">Map {{ mapNumber }}</button>
