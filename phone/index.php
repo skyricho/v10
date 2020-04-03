@@ -12,8 +12,9 @@ if (isset($_GET['Street'])) {
     $request->addFindCriterion('Map', $_GET['Map']); 
     //$request->addFindCriterion('Block', $_GET['Block']);
     $request->addFindCriterion('Street', str_replace('-', ' ', $_GET['Street']));
-    $request->addFindCriterion('cPhone', 'phone');
-    $request->addFindCriterion('phoneActionState::action', str_replace('-', ' ', $_GET['Filter']));
+    //$request->addFindCriterion('cPhone', 'phone');
+    $request->addFindCriterion('toPhone', '*');
+    //$request->addFindCriterion('phoneActionState::action', str_replace('-', ' ', $_GET['Filter']));
     $request->addSortRule('cNumber', 1);
     
     $result = $request->execute();
