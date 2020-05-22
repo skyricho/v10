@@ -35,6 +35,8 @@ if (isset($_GET['Street'])) {
                 //'description' => $record->getField('Address Description'),
                 'badgeColour' => $record->getField('PhoneActionState::badgeColour'),
                 'status' => $record->getField('PhoneActionState::action'),
+                'postCode' => $record->getField('cPostCode'),
+                'streetNameOnly' => $record->getField('cStreetNameOnly')
             );
     }
 }
