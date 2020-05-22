@@ -50,21 +50,11 @@
           </div>
           </form>
 
-          <i id="demo-spinner-{{ address.recID }}" class="fa fa-spinner fa-spin" style="display:none"></i>
-
-          {% include 'phone/phone-numbers.twig' %}
-          <div class="mt-3" id="{{ address.recID }}-phone-numbers"></div>          
-          <div id="{{ address.recID }}-foo"></div>
-          <form id="{{ address.recID }}-add-phone-number" ic-post-to="add-phone.php" 
-          ic-target="#{{ address.recID }}-phone-numbers" ic-on-success="$('#{{ address.recID }}-add-phone-number')[0].reset()" ic-swap-style="append">
-            <div class="input-group mt-3">
-              <input type="hidden" name="propertyID" value="{{ address.recID }}">
-              <input type="text" class="form-control" id="{{ address.recID }}-exampleInputText1" placeholder="Enter phone number" name="phoneNumber" value="">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Submit</button>
-              </div>
-            </div>
-          </form>
+          <div class="mt-3" id="{{ address.recID }}-phone-numbers">
+            <i id="demo-spinner-{{ address.recID }}" class="fa fa-spinner fa-spin" style="display:none"></i>
+          </div>          
+         
+       
           </div>
         
         </div>  
