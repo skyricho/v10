@@ -27,7 +27,7 @@
 <ul class="list-group">
   {% for address in addresses %}
       <li id="{{ address.recID }}" class="list-group-item">
-        <a data-toggle="collapse" href="#revert-{{ address.recID }}" role="button" aria-expanded="false" aria-controls="revert-{{ address.recID }}" ic-get-from="get-phone-numbers.php?propertyID={{ address.recID }} " ic-target="#{{ address.recID }}-phone-numbers">
+        <a data-toggle="collapse" href="#revert-{{ address.recID }}" role="button" aria-expanded="false" aria-controls="revert-{{ address.recID }}" ic-get-from="person-lookup.php?q={{ address.streetNumber }}+{{ address.streetNameOnly }}+{{ address.postCode }}" ic-target="#{{ address.recID }}-phone-numbers">
           {{ address.streetNumber }} {{ address.streetName }}
         </a>
         <div class="float-right" id="{{ address.recID }}-status"><span class="badge badge-{{ address.badgeColour }}">{{ address.status }}</span></div>
