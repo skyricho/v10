@@ -28,7 +28,7 @@ if (isset($_GET['q'])) {
 
 	}
 
-    echo '<div class="float-right pt-1"><a href="' . $url . '">Source</a></div>';
+    echo '<div class="float-right pt-1"><a href="' . $url . '">Source <i class="fas fa-link"></i></a></div>';
 
 } else {
     echo 'No address provided';
