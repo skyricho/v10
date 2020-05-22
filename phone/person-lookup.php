@@ -17,16 +17,18 @@ if (isset($_GET['q'])) {
 		$rows = count($html->find('table', 0)->children());
 		$x = 1; 
 
+		echo '<div class="list-group">';
 		while($x < $rows) {
 		  $t = $html->find('table', 0)->children($x)->last_child()->plaintext;
 		  //echo  $t . '<br>';
-		  echo '<a href="tel:' . $t . '">' . $t . '</a><br>';
+		  echo '<a href="tel:' . $t . '" class="list-group-item list-group-item-action">' . $t . '</a>';
 		  $x++;
 		}
+		echo '</div>';
 
 	}
 
-    echo '<br><a href="' . $url . '">Source</a>';
+    echo '<div class="float-right pt-1"><a href="' . $url . '">Source</a></div>';
 
 } else {
     echo 'No address provided';
