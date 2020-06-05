@@ -5,6 +5,22 @@ include('simple_html_dom.php');
 // Retrieve the DOM from a given URL
 $html = file_get_html('https://personlookup.com.au/search?utf8=✓&search=true&page=1&country_id=1&q=lawn+ave+lane+cove+west&state_id=5');
 
+
+echo '<h3>Get column3 and part of column 2</h3>';
+$rows = count($html->find('table', 0)->children());
+//echo 'Rows: ' . $rows . '<br>';
+
+$x = 1; 
+
+while($x < $rows) {
+  $t = $html->find('table', 0)->children($x)->last_child();
+  $tt = $t->prev_sibling();
+  //echo  $t . ' ' . $tt . '<br>';
+  $arr = explode(' ',trim($tt));
+  echo '<a href="tel:' . str_replace(" ","",$t) . '">' . $t . '</a> (' . $arr[0] . $arr[1] . ')<br>';
+  $x++;
+}
+
 $tel = $html->find('table', 0)->children(1)->children(2)->plaintext;
 echo '<h3>Make phone number clickable (row 1)</h3>';
 echo '<a href="tel:' . str_replace(" ","",$tel) . '">' . $tel . '</a><br><hr>';
@@ -15,7 +31,7 @@ echo $response .  '<br><hr>';
 
 // Find all <td> in <table> which class=hello 
 //$es = $html->find('table.table td');
-echo '<h3>Raw table</h3>';
+echo '<h3>Column 3</h3>';
 $rows = count($html->find('table', 0)->children());
 //echo 'Rows: ' . $rows . '<br>';
 
@@ -23,7 +39,6 @@ $x = 1;
 
 while($x < $rows) {
   $t = $html->find('table', 0)->children($x)->last_child();
-  //echo  $t . '<br>';
   echo '<a href="tel:' . str_replace(" ","",$t) . '">' . $t . '</a><br>';
   $x++;
 }
