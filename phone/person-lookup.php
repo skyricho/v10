@@ -27,10 +27,10 @@ if (isset($_GET['q'])) {
 		  $arr = explode(' ',trim($tt));
 		  if (is_numeric($streetNumber)) {
 		      if (strlen($arr[1]) > 1) {
-		  	      echo '<a href="tel:' . $t . '" class="list-group-item list-group-item-action">' . $t . '</a>';
+		  	      echo '<a href="tel:' . $t . '" class="list-group-item list-group-item-action"><i class="fas fa-phone-square" aria-hidden="true"></i> ' . $t . '</a>';
 		  	  }
 		  } else {
-              echo '<a href="tel:' . $t . '" class="list-group-item list-group-item-action">' . $t . '</a>';
+              echo '<a href="tel:' . $t . '" class="list-group-item list-group-item-action"><i class="fas fa-phone-square" aria-hidden="true"></i> ' . $t . '</a>';
 		  }
 		  $x++;
 		}
