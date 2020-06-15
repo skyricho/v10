@@ -61,21 +61,31 @@
             <input type="hidden" name="streetNumber" value="{{ address.streetNumber }}">
             <input type="hidden" name="streetName" value="{{ address.streetName }}">
             <input type="hidden" name="addressDescription" value="{{ address.description|raw }}">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" ic-target="#{{ address.recID }}" ic-confirm="Are you sure?" checked>
-              <label class="form-check-label" for="defaultCheck1">
-              <div class="text-muted">
-                {{ address.streetNumber }} {{ address.streetName }}
+            
+            <div class="d-flex justify-content-between text-muted">
+              <div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" ic-target="#{{ address.recID }}" ic-confirm="Are you sure?" checked>
+                  <label class="form-check-label" for="defaultCheck1">
+                  {{ address.streetNumber }} {{ address.streetName }}
+                  </label>
+                </div>
+              </div>
+              <div>
+                <i class="fas fa-mail-bulk"></i> Letter sent
+              </div>
+            </div>
+
+             
                 <!-- hide visted date -->
                 <!--<span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
                   <small><i>{{ address.modDate|date("D d M") }}</i></small>
                 </span>-->
-                {% if address.description  %}
+<!--                {% if address.description  %}
                   </br><small class="text-muted">{{ address.description|raw }}</small>
-                {% endif %}
-              </div>
-            </label>
-            </div>
+                {% endif %}-->
+
+
           </form>
         </div>
       </li>
