@@ -81,10 +81,11 @@
                 <!--<span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
                   <small><i>{{ address.modDate|date("D d M") }}</i></small>
                 </span>-->
-<!--                {% if address.description  %}
-                  </br><small class="text-muted">{{ address.description|raw }}</small>
-                {% endif %}-->
-
+            {% if address.description  %}
+              <div>
+                <small class="text-muted">{{ address.description|raw }}</small>
+              </div>
+            {% endif %}
 
           </form>
         </div>
