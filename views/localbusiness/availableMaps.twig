@@ -1,0 +1,22 @@
+<!-- Consider using list group button or link instead -->
+  <ul class="list-group">
+	{% for map in availableMaps %}
+	  <li id="Map-{{ map.Map }}" class="list-group-item">
+	  	{% if map.coverageType == 'Phone' %}
+	  	  <a  href="phone/?Map={{ map.Map }}" role="button">
+	  	    Map {{ map.Map }}
+	    <!--</a><span class="pl-5"><small class="text-muted">{{ map.Name }}</small></span>-->
+	      </a>
+	    {% else %}
+	      <a  href="?Map={{ map.Map }}" role="button">
+	  	    Map {{ map.Map }}
+	    <!--</a><span class="pl-5"><small class="text-muted">{{ map.Name }}</small></span>-->
+	      </a>
+	    {% endif %}
+	    <span class="ml-1"><i class="fas fa-store"></i></span>
+
+	    
+	  	<div class="float-right"><span class="badge badge-{{ map.Colour }}">{{ map.Suburb }}</span></div>
+	  </li>
+	{% endfor %}
+   </ul>

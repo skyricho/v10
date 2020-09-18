@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Add a local business{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="../index.php">
+    At Homes
+  </a>
+
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">  
+      <!--<li class="nav-item">
+        <a class="nav-link disabled" href="#">Account</a>
+      </li>-->
+      <!--<li class="nav-item">
+        <a class="nav-link" href="../">Back to At Homes</a>
+      </li>-->
+      <li class="nav-item">
+        <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" href="../admin/?Filter=assigned">Admin</a>
+      </li> 
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+{% if errorMessage %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ errorMessage }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+{% endif %}
+
+<main class="container">
+  <h5 class="p-2">Add a local business</h5>
+
+        <form class="needs-validation" action="" method="post" novalidate>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Map</span>
+            </div>
+            <input type="text" class="form-control" name="map" value="" placeholder="Enter map number" aria-label="map" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon4">Block</span>
+            </div>
+            <input type="text" class="form-control" name="block" value="" placeholder="Enter block number" aria-label="block" aria-describedby="basic-addon4">
+          </div>
+
+          <div><hr></div>
+
+          <div class="form-group">
+            <label for="businessName">Business Name</label>
+            <input type="text" class="form-control" name="businessName" value="" aria-describedby="businessName">
+          </div>
+
+           <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" name="address" value="" aria-describedby="address">
+            <small id="addressHelp" class="form-text text-muted">No need to add suburb or postcode</small>
+          </div>
+
+          <div><hr></div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon2">Contact</span>
+            </div>
+            <input type="text" class="form-control" name="contactName" value="" placeholder="Person to contact" aria-label="streetName" aria-describedby="basic-addon2">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Position</label>
+            </div>
+            <select class="custom-select" name="contactPosition" id="inputGroupSelect01">
+              <option selected>Choose...</option>
+              <option value="Owner">Owner</option>
+              <option value="Manager">Manager</option>
+            </select>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon2">Email</span>
+            </div>
+            <input type="text" class="form-control" name="contactEmail" value="" placeholder="Enter email address" aria-label="streetName" aria-describedby="basic-addon2">
+          </div>
+
+          <div><hr></div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon5">Name</span>
+            </div>
+            <input type="text" class="form-control" name="FormSubmissionUser" value="{{ user }}" placeholder="Enter your first name" aria-label="firstName" aria-describedby="basic-addon5" required>
+            <div class="invalid-feedback">
+              Please enter your first name.
+            </div>
+          </div>
+        </div>
+      <div class="mb-3">
+        <input type="hidden" name="action" value="create">
+        <button type="submit" class="btn btn-outline-primary" name="addLocalBusiness">Submit</button>
+      </div>
+
+      </form>
+
+</main>
+
+{% endblock %}
+
+

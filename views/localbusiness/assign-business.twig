@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Assign a local business{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="../index.php">
+    At Homes
+  </a>
+
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">  
+      <!--<li class="nav-item">
+        <a class="nav-link disabled" href="#">Account</a>
+      </li>-->
+      <!--<li class="nav-item">
+        <a class="nav-link" href="../">Back to At Homes</a>
+      </li>-->
+      <li class="nav-item">
+          <a class="nav-link" href="localbusiness/add-business.php">Add a local business</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" href="../admin/?Filter=assigned">Admin</a>
+      </li> 
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+
+
+{% if errorMessage %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ errorMessage }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+{% endif %}
+
+<main class="container">
+  <h4 class="my-3">Map {{ map }} Businesses</h4>
+
+  <ul class="list-group">
+    {% for localbusiness in localbusinesses %}
+
+    <li class="list-group-item" id="foo-{{ localbusiness.id }}">
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          <h5 class="mb-1"><span style="font-size: 1em; color: {{ localbusiness.badgeColor }};"><i class="fas fa-check-circle"></i></span> {{ localbusiness.businessName|raw }}</h5>
+        </div>
+      </div>
+      
+          <form class="form-inline" ic-post-to="update-assignment.php" ic-target="#foo-{{ localbusiness.id }}">
+            <div class="input-group mb-3">
+              <input type="hidden" name="id" value="{{ localbusiness.id }}">
+              <input type="hidden" name="businessName" value="{{ localbusiness.businessName|raw }}">
+              <input type="text" class="form-control" name="assignedTo" value="{{ localbusiness.assignee }}" placeholder="Enter name" aria-label="Enter name" aria-describedby="basic-addon2"> 
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary">Save</button>
+                <button class="btn btn-outline-secondary btnn" data-clipboard-text="https://qc.r2labs.com/ah/v10/localbusiness/?u={{ localbusiness.assignee|replace({" ": "%20"}) }}"><i class="fa fa-copy" aria-hidden="true"></i></button>
+              </div>   
+            </div>
+          </form>
+        
+    </li>
+
+  {% endfor %}
+
+  </ul>
+  <!--<button class="btnn" data-clipboard-text="foo">
+    Copy
+</button>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+  <script>
+    new ClipboardJS('.btnn');
+  </script>
+{% endblock %}
