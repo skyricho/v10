@@ -2,7 +2,7 @@
 include ("../dbaccess.php");
 ini_set('display_errors', 1);
 
-} elseif (isset($_POST['update'])) {
+if (isset($_POST['update'])) {
     $edit = $fm->newEditCommand('LocalBusiness', $_POST['id']);
     $edit->setField('assignedTo', $_POST['assignedTo']);
     $edit->setField('map', $_POST['map']);
