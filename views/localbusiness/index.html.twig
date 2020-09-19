@@ -17,7 +17,7 @@
         <a class="nav-link" href="phone">Phone Calls</a>
         </li>-->
         <li class="nav-item">
-          <a class="nav-link" href="localbusiness/add-business.php">Add a local business</a>
+        <a class="nav-link" href="localbusiness">Local Businesses</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="admin/?Filter=assigned">Admin</a>
@@ -93,7 +93,13 @@
     <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div>
   {% include 'mapBlocks.twig' %}
+
 {% endif %} 
+
+{% if availableMaps %}
+  {% include 'localbusiness/availableMaps.twig' %}
+{% endif %}
+
     
 {% endblock %}
 
