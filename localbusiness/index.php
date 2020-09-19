@@ -7,7 +7,8 @@ $loader = new Twig_Loader_Filesystem('../views');
 $twig = new Twig_Environment($loader);
 $template = $twig->load('localbusiness/index.html.twig');
 
-if (isset($_POST['addLocalBusiness'])) {
+if (isset($_GET['Block'])) {
+    if (isset($_POST['addLocalBusiness'])) {
     $request = $fm->createRecord('LocalBusiness');
     $request->setField('map', $_POST['map']);
     $request->setField('block', $_POST['block']);
@@ -22,18 +23,8 @@ if (isset($_POST['addLocalBusiness'])) {
     $errorMessage = 'Business added. Add another...';
     $user = $_POST['FormSubmissionUser'];
 
+    }
 
-    # prepare variables for template
-    echo $template->render(array(
-        'errorMessage' => $errorMessage,
-        //'user' => $user,
-        //'localbusinesses' => $localbusinesses
-        )
-    );
-
-}
-
-if (isset($_GET['Block'])) {
     # Query avaible buinsesses to contact
     $request = $fm->newFindCommand('LocalBusiness');
     $request->addFindCriterion('map', $_GET['Map']);
@@ -85,7 +76,8 @@ if (isset($_GET['Block'])) {
             'blockNumber' => $_GET['Block'],
             'mapBlocks' => $mapBlocks,
             'mapNumber' => $_GET['Map'],
-            'errorMessage' => $_GET['msg']
+            'errorMessage' => $errorMessage,
+            'user' => $user
         )
     );
 
