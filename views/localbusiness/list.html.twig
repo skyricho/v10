@@ -14,22 +14,19 @@
           <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
         </li> 
         <!--<li class="nav-item">
-        <a class="nav-link" href="../phone">Phone Calls</a>
+        <a class="nav-link" href="phone">Phone Calls</a>
         </li>-->
         <li class="nav-item">
-        <a class="nav-link" href="?foo=1">Local Businesses</a>
+        <a class="nav-link" href="../localbusiness">Local Businesses</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../admin/?Filter=assigned">Admin</a>
+          <a class="nav-link" href="admin/?Filter=assigned">Admin</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="../territory-overview">Territory Overview</a>
+          <a class="nav-link" href="admin/s-13.php">S-13</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="a../dmin/s-13.php">S-13</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../admin/address-change-log.php">Change Log</a>
+          <a class="nav-link" href="admin/address-change-log.php">Change Log</a>
         </li>
         
       <!--
@@ -78,6 +75,32 @@
         </script>
   </div>
 
+
+<!-- Nav: block, street and filter -->  
+ <ul class="nav">
+    <li class="nav-item">
+      <a class="btn btn-outline-secondary" href="index.php?Map={{ mapNumber }}" role="button">Map {{ mapNumber}}</a>
+    </li>
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Block {{ blockNumber}}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      {% for mapBlock in mapBlocks %}
+        <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{ mapBlock.Block }}&Filter={{ Filter }}">
+          Block {{ mapBlock.Block }}
+        </a>
+      {% endfor %} 
+        </div>
+    </div>
+  </li>
+
+  <li class="nav-item">
+    <a class="btn btn-outline-secondary" href="#exampleModal4" data-toggle="modal" data-target="#exampleModal4"><span><i class="fas fa-plus"></i></span></a>
+  </li>
+</ul>
+
 {% if errorMessage %}
   <div class="alert alert-success alert-dismissible fade show" role="alert">
   {{ errorMessage }}
@@ -88,20 +111,11 @@
 {% endif %} 	
 
 
-{% if mapNumber %}
-  <h3 class="m-2">Map {{ mapNumber }}</h3>
-  {% include 'localbusiness/mapBlocks.twig' %}
-  <div class="text-center">
-    <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
-  </div>
-{% endif %} 
-
-
-
-{% if availableMaps %}
-  {% include 'localbusiness/availableMaps.twig' %}
+{% if localbusinesses %}
+  {% include 'localbusiness/businessList.twig' %}
 {% endif %}
 
-    
+{% include 'modal-forms.twig' %}
+
 {% endblock %}
 

@@ -1,0 +1,9 @@
+<ul class="list-group">
+  {% for mapBlock in mapBlocks %}
+	<li class="list-group-item">
+	  <a  href="list.php?Map={{ mapNumber }}&Block={{ mapBlock.Block }}" role="button">
+	    Block {{ mapBlock.Block }}	 
+	  </a>
+	</li>
+  {% endfor %}
+</ul>

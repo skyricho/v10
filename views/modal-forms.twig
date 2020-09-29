@@ -208,7 +208,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="" action="" method="post">
+        <form class="" action="list.php?Map={{ mapNumber}}&Block={{ blockNumber }}" method="post">
 
           <div class="form-group">
             <input type="text" class="form-control" name="businessName" value="" aria-describedby="emailHelp" placeholder="Enter business name">
@@ -235,13 +235,14 @@
         </div>
 
       <div class="modal-footer">
-        <input type="hidden" name="map" value="5">
-        <input type="hidden" name="block" value="4">
+        <input type="hidden" name="map" value="{{ mapNumber }}">
+        <input type="hidden" name="block" value="{{ blockNumber }}">
         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-outline-primary" name="addLocalBusiness">Save</button>
       </div>
 
       </form>
+
     </div>
   </div>
 </div>
