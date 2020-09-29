@@ -13,7 +13,7 @@ $assignedToSafe = str_replace(' ', '%20', $_POST['assignedTo']);
 
 
 
-  <form class="form-inline" ic-post-to="update-assignment.php" ic-target="#foo-<?php echo $_POST['id'] ?>">
+  <form class="form-inline" ic-post-to="assign.php" ic-target="#assign-<?php echo $_POST['id'] ?>">
 	<div class="input-group mb-3">
 	  <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>">
 	  <input type="hidden" name="businessName" value="<?php echo $_POST['businessName']?>">
