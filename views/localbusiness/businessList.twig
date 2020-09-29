@@ -47,7 +47,21 @@
             
           </form>
 
-          <h4>Assign</h4>
+          <h4 class="mt-4">Assign</h4>
+          <div id="assign-{{ localbusiness.id }}">
+
+            <form class="form-inline" ic-post-to="assign.php" ic-target="#assign-{{ localbusiness.id }}">
+              <div class="input-group mb-3">
+                <input type="hidden" name="id" value="{{ localbusiness.id }}">
+                <input type="hidden" name="businessName" value="{{ localbusiness.businessName|raw }}">
+                <input type="text" class="form-control" name="assignedTo" value="{{ localbusiness.assignee }}" placeholder="Enter name" aria-label="Enter name" aria-describedby="basic-addon2"> 
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary">Save</button>
+                  <button class="btn btn-outline-secondary btnn" data-clipboard-text="https://qc.r2labs.com/ah/v10/localbusiness/?u={{ localbusiness.assignee|replace({" ": "%20"}) }}"><i class="fa fa-copy" aria-hidden="true"></i></button>
+                </div>   
+              </div>
+            </form>
+          </div>
 
           <div class="mt-3" id="{{ address.recID }}-phone-numbers">
             <i id="demo-spinner-{{ address.recID }}" class="fa fa-spinner fa-spin" style="display:none"></i>

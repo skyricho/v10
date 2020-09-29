@@ -38,7 +38,7 @@ if (isset($_POST['addLocalBusiness'])) {
 
 
 
-    # Query avaible buinsesses to contact
+    # Query avaible businesses to contact
     $request = $fm->newFindCommand('LocalBusiness');
     $request->addFindCriterion('map', $_GET['Map']);
     $request->addFindCriterion('block', $_GET['Block']);
