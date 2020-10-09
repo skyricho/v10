@@ -12,6 +12,7 @@ if (isset($_POST['update'])) {
     $edit->setField('contactName', $_POST['contactName']);
     $edit->setField('contactPosition', $_POST['contactPosition']);
     $edit->setField('contactEmail', $_POST['contactEmail']);
+    $edit->setField('phone', $_POST['phone']);
     $edit->setField('FormSubmissionUser', $_POST['user']);
     $edit->execute();
 

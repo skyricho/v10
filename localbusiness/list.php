@@ -18,6 +18,7 @@ if (isset($_POST['addLocalBusiness'])) {
     $request->setField('contactName', $_POST['contactName']);
     $request->setField('contactPosition', $_POST['contactPosition']);
     $request->setField('contactEmail', $_POST['contactEmail']);
+    $request->setField('phone', $_POST['phone']);
     $request->setField('FormSubmissionUser', $_POST['FormSubmissionUser']);
     $result=$request->commit();
 
@@ -60,7 +61,8 @@ if (isset($_POST['addLocalBusiness'])) {
                 'streetAddressRaw' => $record->getField('streetAddressRaw'),
                 'contactName' => $record->getField('contactName'),
                 'contactPosition' => $record->getField('contactPosition'),
-                'contactEmail' => $record->getField('contactEmail'),                
+                'contactEmail' => $record->getField('contactEmail'),
+                'phone' => $record->getField('phone'),             
                 'formSubmissionUser' => $record->getField('FormSubmissionUser'),
                 'assignee' => $record->getField('assignedTo'),
                 'status' => $record->getField('status'),                

@@ -15,9 +15,10 @@
           <form class="form-inline" ic-post-to="business.php" ic-target="#foo-{{ localbusiness.id }}">
             <input type="hidden" name="id" value="{{ localbusiness.id }}">
             <input class="form-control" type="text" placeholder="Business Name" name="businessName" value="{{ localbusiness.businessName|raw }}">
-             <input class="form-control" type="text" placeholder="Address" name="address" value="{{ localbusiness.streetAddressRaw }}">
-             <input class="form-control" type="text" placeholder="Email" name="contactEmail" value="{{ localbusiness.contactEmail }}">
-              <input class="form-control" type="text" placeholder="Name of Manager" name="contactName" value="{{ localbusiness.contactName|raw }}">
+            <input class="form-control" type="text" placeholder="Add address" name="address" value="{{ localbusiness.streetAddressRaw }}">
+            <input class="form-control" type="text" placeholder="Add email" name="contactEmail" value="{{ localbusiness.contactEmail }}">
+            <input class="form-control" type="text" placeholder="Add name of manager" name="contactName" value="{{ localbusiness.contactName|raw }}">
+            <input class="form-control" type="text" placeholder="Add phone number" name="phone" value="{{ localbusiness.phone|raw }}">
 
               <div class="input-group mt-3">
                 <div class="input-group-prepend">
