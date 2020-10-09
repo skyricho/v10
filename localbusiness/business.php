@@ -16,7 +16,14 @@ if (isset($_POST['update'])) {
     $edit->execute();
 
     echo 'Saved.';
-}
 
+} 
+
+if (isset($_POST['delete'])) {
+    $rec = $fm->getRecordById('LocalBusiness', $_POST['id']);
+    $rec->delete();
+
+    echo 'Business deleted.';
+}
 
 ?>

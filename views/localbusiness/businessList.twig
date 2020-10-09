@@ -64,6 +64,35 @@
           </div>
 
           <h4 class="mt-4">Status</h4>
+          <div id="status-{{ localbusiness.id }}">
+
+            <form class="form-inline" ic-post-to="status.php" ic-target="#status-{{ localbusiness.id }}">
+              <input type="hidden" name="id" value="{{ localbusiness.id }}">
+              <div class="input-group mb-3">
+                <select class="custom-select" id="inputGroupSelect02" name="status">
+                  <option selected>{{ localbusiness.status }}</option>
+                  <option value="Letter sent">Letter sent</option>
+                  <option value="Email sent">Email sent</option>
+                  <option value="">Reset</option>
+                </select>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary">Save</button>
+                </div>   
+              </div>
+            </form>
+
+          </div>
+
+          <div id="alert"></div> 
+          <form class="form-inline" ic-post-to="business.php" ic-confirm="Are you sure?" ic-target="#{{ localbusiness.id }}">
+            <input type="hidden" name="id" value="{{ localbusiness.id }}">
+            
+                    <div class="mt-3">
+        <button type="submit" class="btn btn-outline-danger btn-block" name="delete">Delete this business</button><span class="ml-3" id="foo-{{ localbusiness.id }}"></span>
+      </div>
+
+            
+          </form>
 
           <div class="mt-3" id="{{ address.recID }}-phone-numbers">
             <i id="demo-spinner-{{ address.recID }}" class="fa fa-spinner fa-spin" style="display:none"></i>
