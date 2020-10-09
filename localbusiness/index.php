@@ -52,6 +52,7 @@ if (isset($_GET['Map'])) {
                 'Name' => $record->getField('MapAssignment::cFirstName'),
                 'coverageType' => $record->getField('MapAssignment::coverageType'),
                 'cBusinessSum' => $record->getField('cBusinessSum'),
+                'campaignAssignee' => $record->getField('campaignAssignee'),
                 'sBusinessTotal' => $record->getField('sBusinessTotal')
 
 
