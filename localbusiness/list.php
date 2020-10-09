@@ -63,6 +63,7 @@ if (isset($_POST['addLocalBusiness'])) {
                 'contactEmail' => $record->getField('contactEmail'),                
                 'formSubmissionUser' => $record->getField('FormSubmissionUser'),
                 'assignee' => $record->getField('assignedTo'),
+                'status' => $record->getField('status'),                
                 'map' => $record->getField('map'),
                 'block' => $record->getField('block'),
                 //'assigneeDash' => str_replace(' ', '-', $record->getField('assignedTo')),
