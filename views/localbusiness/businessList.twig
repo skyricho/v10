@@ -1,6 +1,7 @@
 <ul class="list-group">
   {% for localbusiness in localbusinesses %}
       <li id="{{ localbusiness.id }}" class="list-group-item">
+        <span><i class="fas fa-check-circle" style="color: {{ localbusiness.badgeColor }}"></i></span>
         <a data-toggle="collapse" href="#revert-{{ localbusiness.id }}" role="button" aria-expanded="false" aria-controls="revert-{{ localbusiness.id }}">
           {{ localbusiness.businessName|raw }}
         </a>
@@ -58,7 +59,7 @@
                 <input type="text" class="form-control" name="assignedTo" value="{{ localbusiness.assignee }}" placeholder="Enter name" aria-label="Enter name" aria-describedby="basic-addon2"> 
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary">Save</button>
-                  <button class="btn btn-outline-secondary btnn" data-clipboard-text="https://qc.r2labs.com/ah/v10/localbusiness/?u={{ localbusiness.assignee|replace({" ": "%20"}) }}"><i class="fa fa-copy" aria-hidden="true"></i></button>
+                  <button class="btn btn-outline-secondary btnn" data-clipboard-text="https://qc.r2labs.com/ah/v10/localbusiness/my-list.php?u={{ localbusiness.assignee|replace({" ": "%20"}) }}"><i class="fa fa-copy" aria-hidden="true"></i></button>
                 </div>   
               </div>
             </form>
