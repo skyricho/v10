@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  
+      <title>At Homes | List of publishers currently assigned a map.</title>
+      <script src="https://kit.fontawesome.com/94cb094786.js" crossorigin="anonymous"></script>
+
+      <script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var JSONObject = JSON.parse(this.responseText);
+            
+
+            var mapListHTML = "<ul class=\"list-group\">";
+            // Loop through Object and create peopleHTML
+            for (var assignee in JSONObject) {
+              var x = JSONObject[assignee]["firstName"];
+              var y = x.replace(" ", "-");
+              mapListHTML += "<li class=\"list-group-item\"><a data-toggle=\"collapse\" href=\"#collapse-" + JSONObject[assignee]["firstName"].replace(" ", "-") + "\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">" + JSONObject[assignee]["firstName"] + "</a><div class=\"collapse\" id=\"collapse-" + JSONObject[assignee]["firstName"].replace(" ", "-") + "\">"
+              mapListHTML += "<div class=\"card card-body border-0\">"
+
+                //mapListHTML += " Map: " + JSONObject[key].Maps[0].mapNumber;
+                for (var assignedMap in JSONObject[assignee].Maps) {
+                  mapListHTML += "<div class=\"row\">";
+                  mapListHTML += "<div class=\"col text-decoration-none text-dark\">";
+                   if (JSONObject[assignee].Maps[assignedMap]["coverageType"] == 'Letter') {
+                    mapListHTML += "<span class=\"mr-2\"><i class=\"fas fa-envelope\"></i></span>";
+                  } else if (JSONObject[assignee].Maps[assignedMap]["coverageType"] == 'Phone') {
+                    mapListHTML += "<span class=\"mr-2\"><i class=\"fas fa-phone-square\"></i></span>";
+                  }
+
+                  mapListHTML += "<a  href=\"block-list.html?map=" + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "\">Map " + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "</a>";
+                  mapListHTML += "</div>"
+                  mapListHTML += "<div class=\"col-6 text-right\"><span class=\"badge badge-" + JSONObject[assignee].Maps[assignedMap]["badgeColour"] + "\">" + JSONObject[assignee].Maps[assignedMap]["suburb"] + "</span></div>";
+                  mapListHTML += "</div>"
+
+                }
+              mapListHTML += "</div></div></li>";
+            }
+            mapListHTML += "</ul>";
+
+
+
+
+              
+              //for (var key in JSONObject) {
+                //if (JSONObject.hasOwnProperty(key)) {
+                  //mapListHTML += "<p>" + JSONObject[key]["Maps"]["mapNumber"] + "</p>";
+                  /*mapListHTML += "<a class=\"list-group-item\" href=\"block-list.html?map=" + JSONObject[key]["firstName"] + "\">";
+                    mapListHTML += "<div class=\"row\">";
+                      mapListHTML += "<div class=\"col text-decoration-none text-dark\"> " + JSONObject[key]["firstName"] + "</div>";
+                      mapListHTML += "<div class=\"col text-left\"><span class=\"badge badge-light\">" + JSONObject[key]["Maps"] + "</span></div>";
+                      mapListHTML += "<div class=\"col-5 text-right\"><span class=\"badge badge-" + JSONObject[key]["colour"] + "\">" + JSONObject[key]["suburb"] + "</span></div>";
+                    mapListHTML += "</div>";
+                  mapListHTML += "</a>";*/
+                //}
+              //}
+
+            document.getElementById("map-list").innerHTML = mapListHTML;
+
+            }
+        };
+        xmlhttp.open("GET", "assignees.json", true);
+        xmlhttp.send();
+      </script>
+  </head>
+  <body>
+     <header>
+       <nav class="navbar navbar-dark bg-secondary">
+         <a class="navbar-brand" href="index.html">At Homes</a>
+      </nav>
+    </header>
+
+    <main role="main">
+      <div id="map-list">
+      </div>
+
+    <footer class="text-muted bg-light py-2">
+        <p class="text-center">
+          <a href="admin">Admin</a> | 
+          <a href="about.html">About</a>
+        </p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
