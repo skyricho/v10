@@ -36,6 +36,10 @@ if (isset($_POST['deactivate'])) {
     $edit->setField('Map::mapAssignmentId', '');
 	$edit->execute();
 
+	//TODO
+	//send Map ID in form data, send userID as well
+	//delete userID from map, delete coverageType
+
 	echo '<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-foo">
 	        Map ' . $_POST['Map'] . ' has been handed in 
 		    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -52,6 +56,11 @@ if (isset($_POST['deactivate'])) {
     $edit->setField('MapAssignment::coverageType', $_POST['coverageType']);
     $edit->setField('MapAssignment::startContacted', $_POST['cAH']);
 	$edit->execute();
+
+		//TODO
+	//send Map ID in form data, send userID as well, coveragetype as weell
+	// update Map with userid and coverageType
+
 
 	$record = $fm->getRecordByID('Map', $_POST['id']);
 	echo '<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-foo">
