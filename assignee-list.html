@@ -32,11 +32,15 @@
                   mapListHTML += "<div class=\"col text-decoration-none text-dark\">";
                    if (JSONObject[assignee].Maps[assignedMap]["coverageType"] == 'Letter') {
                     mapListHTML += "<span class=\"mr-2\"><i class=\"fas fa-envelope\"></i></span>";
+
+                    mapListHTML += "<a  href=\"index.php?Map=" + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "\">Map " + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "</a>";
+
                   } else if (JSONObject[assignee].Maps[assignedMap]["coverageType"] == 'Phone') {
                     mapListHTML += "<span class=\"mr-2\"><i class=\"fas fa-phone-square\"></i></span>";
-                  }
+                  
 
-                  mapListHTML += "<a  href=\"block-list.html?map=" + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "\">Map " + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "</a>";
+                  mapListHTML += "<a  href=\"phone/?Map=" + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "\">Map " + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "</a>";
+                  }
                   mapListHTML += "</div>"
                   mapListHTML += "<div class=\"col-6 text-right\"><span class=\"badge badge-" + JSONObject[assignee].Maps[assignedMap]["badgeColour"] + "\">" + JSONObject[assignee].Maps[assignedMap]["suburb"] + "</span></div>";
                   mapListHTML += "</div>"
@@ -73,7 +77,7 @@
   </head>
   <body>
      <header>
-       <nav class="navbar navbar-dark bg-secondary">
+       <nav class="navbar navbar-dark bg-info">
          <a class="navbar-brand" href="index.html">At Homes</a>
       </nav>
     </header>
