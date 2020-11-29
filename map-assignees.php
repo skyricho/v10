@@ -1,12 +1,11 @@
 <?php
 include ("dbaccess.php"); 
-require 'vendor/autoload.php';
 ini_set('display_errors', 1);
 
 
 $request = $fm->newFindCommand('MapAssignees');
 $request->addFindCriterion('MapCount', '>0');
-//$request->addFindCriterion('isPhoneMap', 0);
+$request->addSortRule('First' ,1,FILEMAKER_SORT_ASCEND);
 $result = $request->execute();
 
 # Trap for errors
