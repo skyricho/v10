@@ -90,13 +90,11 @@
   </div>  
 {% endif %} 	
 
-
-
-{% if availableMaps %}
+{% if foo %}
+  {% include 'assignee-list.twig' %}
+{% elseif availableMaps %}
   {% include 'availableMaps.twig' %}
-{% endif %} 
-
-{% if addresses %}
+{% elseif addresses %}
   <div class="text-center">
     <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div> 
@@ -111,7 +109,7 @@
     <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
   </div>
   {% include 'mapBlocks.twig' %}
-{% endif %} 
+{% endif %}
     
 {% endblock %}
 

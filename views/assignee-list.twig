@@ -1,0 +1,70 @@
+
+
+      <script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var JSONObject = JSON.parse(this.responseText);
+            
+
+            var mapListHTML = "<ul class=\"list-group\">";
+            // Loop through Object and create peopleHTML
+            for (var assignee in JSONObject) {
+              var x = JSONObject[assignee]["firstName"];
+              var y = x.replace(" ", "-");
+              mapListHTML += "<li class=\"list-group-item\"><a data-toggle=\"collapse\" href=\"#collapse-" + JSONObject[assignee]["firstName"].replace(" ", "-") + "\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">" + JSONObject[assignee]["firstName"] + "</a><div class=\"collapse\" id=\"collapse-" + JSONObject[assignee]["firstName"].replace(" ", "-") + "\">"
+              mapListHTML += "<div class=\"card card-body border-0\">"
+
+                //mapListHTML += " Map: " + JSONObject[key].Maps[0].mapNumber;
+                for (var assignedMap in JSONObject[assignee].Maps) {
+                  mapListHTML += "<div class=\"row\">";
+                  mapListHTML += "<div class=\"col text-decoration-none text-dark\">";
+                   if (JSONObject[assignee].Maps[assignedMap]["coverageType"] == 'Letter') {
+                    mapListHTML += "<span class=\"mr-2\"><i class=\"fas fa-envelope\"></i></span>";
+
+                    mapListHTML += "<a  href=\"index.php?Map=" + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "\">Map " + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "</a>";
+
+                  } else if (JSONObject[assignee].Maps[assignedMap]["coverageType"] == 'Phone') {
+                    mapListHTML += "<span class=\"mr-2\"><i class=\"fas fa-phone-square\"></i></span>";
+                  
+
+                  mapListHTML += "<a  href=\"phone/?Map=" + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "\">Map " + JSONObject[assignee].Maps[assignedMap]["mapNumber"] + "</a>";
+                  }
+                  mapListHTML += "</div>"
+                  mapListHTML += "<div class=\"col-6 text-right\"><span class=\"badge badge-" + JSONObject[assignee].Maps[assignedMap]["badgeColour"] + "\">" + JSONObject[assignee].Maps[assignedMap]["suburb"] + "</span></div>";
+                  mapListHTML += "</div>"
+
+                }
+              mapListHTML += "</div></div></li>";
+            }
+            mapListHTML += "</ul>";
+
+
+
+
+              
+              //for (var key in JSONObject) {
+                //if (JSONObject.hasOwnProperty(key)) {
+                  //mapListHTML += "<p>" + JSONObject[key]["Maps"]["mapNumber"] + "</p>";
+                  /*mapListHTML += "<a class=\"list-group-item\" href=\"block-list.html?map=" + JSONObject[key]["firstName"] + "\">";
+                    mapListHTML += "<div class=\"row\">";
+                      mapListHTML += "<div class=\"col text-decoration-none text-dark\"> " + JSONObject[key]["firstName"] + "</div>";
+                      mapListHTML += "<div class=\"col text-left\"><span class=\"badge badge-light\">" + JSONObject[key]["Maps"] + "</span></div>";
+                      mapListHTML += "<div class=\"col-5 text-right\"><span class=\"badge badge-" + JSONObject[key]["colour"] + "\">" + JSONObject[key]["suburb"] + "</span></div>";
+                    mapListHTML += "</div>";
+                  mapListHTML += "</a>";*/
+                //}
+              //}
+
+            document.getElementById("map-list").innerHTML = mapListHTML;
+
+            }
+        };
+        xmlhttp.open("GET", "assignees.json", true);
+        xmlhttp.send();
+      </script>
+ 
+    <main role="main">
+      <div id="map-list">
+      </div>
+    </main>s

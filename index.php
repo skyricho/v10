@@ -151,34 +151,12 @@ if (isset($_GET['Street'])) {
     );
 
 } else {
-    $request = $fm->newFindCommand('Map');
-    $request->addFindCriterion('mapAssignmentId', '*');
-    //$request->addFindCriterion('isPhoneMap', 0);
-    $result = $request->execute();
-
-    # Trap for errors
-    if (FileMaker::isError($result)) {
-        $errorMessage = $result->getMessage();
-    } else {
-        $records = $result->getRecords();
-
-        $availableMaps = array();
-        foreach($records as $record) {
-            $availableMaps[] = array(
-                'Map' => $record->getField('Map'),
-                'Suburb' => $record->getField('MapSuburb::suburb'),
-                'Colour' => $record->getField('Suburb::badgeColour'),
-                'Name' => $record->getField('MapAssignment::cFirstName'),
-                'coverageType' => $record->getField('MapAssignment::coverageType'),
-
-                //'toContact' => $record->getField('nhTotal'),
-            );
-        }
-    }
     
+    $foo = 'foo';
+
     echo $template->render(array(
-        'availableMaps' => $availableMaps,
-        'errorMessage' => $errorMessage
+        'foo' => $foo,
+        //'errorMessage' => 'bar'
         )
     );
 
