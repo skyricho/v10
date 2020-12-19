@@ -13,7 +13,7 @@ if (isset($_POST['id'])) {
             <input type="hidden" name="streetNumber" value="' . $_POST['streetNumber'] . '">
             <input type="hidden" name="housingUnitNumber" value="' . $_POST['housingUnitNumber'] . '">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="' . $_POST['id'] . '-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#' . $_POST['streetNumber'] . '-unit-' . $_POST['housingUnitNumber'] . '" ic-confirm="Are you sure?" checked>
+              <input class="form-check-input" type="checkbox" value="" id="' . $_POST['id'] . '-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#' . $_POST['streetNumber'] . '-unit-' . $_POST['unitID'] . '" ic-confirm="Are you sure?" checked>
               <label class="form-check-label" for="defaultCheck1">' . 
                 'Unit ' . $_POST['housingUnitNumber'] . '
               </label>
@@ -28,7 +28,7 @@ if (isset($_POST['id'])) {
             <input type="hidden" name="streetNumber" value="' . $_POST['streetNumber'] . '">
             <input type="hidden" name="housingUnitNumber" value="' . $_POST['housingUnitNumber'] . '">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="' . $_POST['id'] . '-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#' . $_POST['streetNumber'] . '-unit-' . $_POST['housingUnitNumber'] . '">
+              <input class="form-check-input" type="checkbox" value="" id="' . $_POST['id'] . '-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#' . $_POST['streetNumber'] . '-unit-' . $_POST['unitID'] . '">
               <label class="form-check-label" for="defaultCheck1">' . 
                 'Unit ' . $_POST['housingUnitNumber'] . '
               </label>

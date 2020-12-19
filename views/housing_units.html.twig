@@ -2,14 +2,14 @@
   {% for housing_unit in housing_units %}
   	{% if housing_unit.cStatus == 'ah' %}
   	  <!-- Contacted -->
-      <li id="{{ streetNumber }}-unit-{{ housing_unit.Number }}" class="list-group-item list-group-item-light">
+      <li id="{{ streetNumber }}-unit-{{ housing_unit.unitID }}" class="list-group-item list-group-item-light">
         <form id="{{ housing_unit.unitID }}-form">
           <input type="hidden" name="id" value="{{ housing_unit.unitID }}">
           <input type="hidden" name="notHome" value="">
           <input type="hidden" name="streetNumber" value="{{ streetNumber }}">
           <input type="hidden" name="housingUnitNumber" value="{{ housing_unit.Number }}">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="{{ housing_unit.unitID }}-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#{{ streetNumber }}-unit-{{ housing_unit.Number }}" ic-confirm="Are you sure?" checked>
+            <input class="form-check-input" type="checkbox" value="" id="{{ housing_unit.unitID }}-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#{{ streetNumber }}-unit-{{ housing_unit.unitID }}" ic-confirm="Are you sure?" checked>
             <label class="form-check-label" for="defaultCheck1">
               Unit {{ housing_unit.Number }} {{ housing_unit.cStatus }}        
             </label>
@@ -18,7 +18,7 @@
       </li>
   	{% elseif housing_unit.cStatus == 'dnc' %}
   	  <!-- DNC -->
-  	  <li id="{{ streetNumber }}-unit-{{ housing_unit.Number }}" class="list-group-item list-group-item-light">
+  	  <li id="{{ streetNumber }}-unit-{{ housing_unit.unitID }}" class="list-group-item list-group-item-light">
   	    <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" disabled>
           <label class="form-check-label" for="defaultCheck1">
@@ -27,14 +27,14 @@
         </div>        
   	{% else %}
   	  <!-- Default: Not contacted yet -->
-      <li id="{{ streetNumber }}-unit-{{ housing_unit.Number }}" class="list-group-item list-group-item-light">
+      <li id="{{ streetNumber }}-unit-{{ housing_unit.unitID }}" class="list-group-item list-group-item-light">
         <form id="{{ housing_unit.unitID }}-form">
 	      <input type="hidden" name="id" value="{{ housing_unit.unitID }}">
 	      <input type="hidden" name="isHome" value="">
 	      <input type="hidden" name="streetNumber" value="{{ streetNumber }}">
 	      <input type="hidden" name="housingUnitNumber" value="{{ housing_unit.Number }}">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="{{ housing_unit.unitID }}-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#{{ streetNumber }}-unit-{{ housing_unit.Number }}">
+            <input class="form-check-input" type="checkbox" value="" id="{{ housing_unit.unitID }}-checkbox" ic-post-to="updateUnitStatus.php" ic-target="#{{ streetNumber }}-unit-{{ housing_unit.unitID }}">
             <label class="form-check-label" for="defaultCheck1">
               Unit {{ housing_unit.Number }} {{ housing_unit.cStatus }}
             </label>
