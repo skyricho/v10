@@ -126,7 +126,7 @@ if (FileMaker::isError($result)) {
     $edit->setField('MapAssignment::startContacted', $_POST['cAH']);
 	$edit->execute();
 
-    $request = $fm->newFindCommand('MapAssignees');
+    	$request = $fm->newFindCommand('MapAssignees');
 	$request->addFindCriterion('MapCount', '>0');
 	$request->addSortRule('First' ,1,FILEMAKER_SORT_ASCEND);
 	$result = $request->execute();
@@ -220,8 +220,6 @@ if (FileMaker::isError($result)) {
 	# Deletae map assignment
 	$edit = $fm->newEditCommand('MapAssignment', $_POST['id']);
     $edit->setField('Map::mapAssignmentId', '');
-    $edit->setField('Map::userID', '');
-    $edit->setField('Map::coverageType', '');
 	$edit->execute();
 
 	$edit = $fm->getRecordById('MapAssignment', $_POST['id']);
