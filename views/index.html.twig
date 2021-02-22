@@ -45,6 +45,35 @@
 {% endblock %}
 
 {% block content %}
+  <!-- Memrorial Campign -->
+  <figure class="figure">
+    <img src="img/memorial-2021.png" class="figure-img img-fluid rounded" alt="A picture of Jesus using his arms to warmly direct us the way to go.">
+    <figcaption class="figure-caption pl-2">2021 Memorial Invitation Campaign.</figcaption>
+  </figure>
+
+  <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Zac</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Nick</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Shayne</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-foo" role="tab" aria-controls="nav-foo" aria-selected="false">Craig</a>
+  </div>
+</nav>
+<div class="tab-content mb-5" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="list-group">
+      <a href="my-list.php?name=Zac" class="list-group-item list-group-item-action">Zac</a>
+      <a href="my-list.php?name=Karen" class="list-group-item list-group-item-action">Karen</a>
+      <a href="#" class="list-group-item list-group-item-action">Mia</a>
+      <a href="#" class="list-group-item list-group-item-action">Dan</a>
+      <a href="#" class="list-group-item list-group-item-action disabled">Jacqueline</a>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+</div>
+
+<h4 class="pl-2">Map's That Are Checked Out</h4>
 	<!-- Map image and info -->
 	<div class="collapse" id="map-{{ mapNumber }}-info">
 

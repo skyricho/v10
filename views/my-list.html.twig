@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}At Homes{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="index.php">At Homes</a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
+        </li> 
+        <!--<li class="nav-item">
+        <a class="nav-link" href="phone">Phone Calls</a>
+        </li>-->
+        <li class="nav-item">
+        <a class="nav-link" href="localbusiness">Local Businesses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="admin/?Filter=assigned">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="admin/s-13.php">S-13</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="admin/address-change-log.php">Change Log</a>
+        </li>
+        
+      <!--
+      
+      <li class="nav-item">
+        <a class="nav-link" href="signout.php">Sign out</a>
+      </li>-->
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+<h3 class="m-3">{{assignee}}'s List</h3>
+
+{% if errorMessage %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ errorMessage }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>  
+{% endif %} 	
+
+<ul class="list-group">
+  {% for address in addresses %}
+    {% if address.cStatus == 'ah' %}
+      <!-- Contacted -->
+      <li id="{{ address.recID }}" class="list-group-item">
+        <div class="background-color: red;">
+          <form id="{{ address.recID }}-form">
+            <input type="hidden" name="id" value="{{ address.recID }}">
+            <input type="hidden" name="notHome" value="">
+            <input type="hidden" name="streetNumber" value="{{ address.streetNumber }}">
+            <input type="hidden" name="streetName" value="{{ address.streetName }}">
+            <input type="hidden" name="addressDescription" value="{{ address.description|raw }}">
+            
+            <div class="d-flex justify-content-between text-muted">
+              <div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" ic-target="#{{ address.recID }}" ic-confirm="Are you sure?" checked>
+                  <label class="form-check-label" for="defaultCheck1">
+                  {{ address.streetNumber }} {{ address.streetName }}
+                  </label>
+                </div>
+              </div>
+              <div>
+                <i class="fas fa-mail-bulk"></i> Letter sent
+              </div>
+            </div>
+
+             
+                <!-- hide visted date -->
+                <!--<span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
+                  <small><i>{{ address.modDate|date("D d M") }}</i></small>
+                </span>-->
+            {% if address.description  %}
+              <div>
+                <small class="text-muted">{{ address.description|raw }}</small>
+              </div>
+            {% endif %}
+
+          </form>
+        </div>
+      </li>
+    {% elseif address.cStatus == 'DNC' %}
+      <!-- DNC -->
+      <li id="{{ address.recID }}" class="list-group-item " > <!-- option: list-group-item-danger -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" disabled>
+          <label class="form-check-label" for="defaultCheck1">
+            <span class="badge badge-danger">DNC</span> {{ address.streetNumber }} {{ address.streetName }}
+            {% if address.description  %}
+              </br><small class="text-muted">{{ address.description|raw }}</small>
+            {% endif %}
+          </label>
+        </div>
+      </li> 
+    {% elseif address.cStatus == 'HousingUnits' %}
+      <!-- Housing Units -->
+      <li id="{{ address.recID }}" class="list-group-item list-group-item-primary">
+        <a ic-get-from="HousingUnits.php?id={{ address.recID }}" ic-target="#{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units" href="#{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units">
+          {{ address.streetNumber }} {{ address.streetName }}
+        </a>
+        {% if address.cUnitBlockContacted == 1 %}
+        <span class="badge badge-light ml-1">
+          <i class="far fa-building"></i> All units contacted</span>
+        <span class="badge badge-pill badge-secondary ml-1">{{ address.UnitsNH }}</span>
+        {% else %}
+        <span class="badge badge-light ml-1"><i class="far fa-building"></i> {{ address.unitsNH }} units to contact</span>
+        {% endif %}
+      </li>
+      <div class="collapse" id="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units"></div>
+    {% else %}
+       <!-- Default: Not contacted yet -->
+       <li id="{{ address.recID }}" class="list-group-item">
+          <form id="{{ address.recID }}-form">
+            <input type="hidden" name="id" value="{{ address.recID }}">
+            <input type="hidden" name="isHome" value="">
+            <input type="hidden" name="streetNumber" value="{{ address.streetNumber }}">
+            <input type="hidden" name="streetName" value="{{ address.streetName }}">
+            <input type="hidden" name="addressDescription" value="{{ address.description|raw }}">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" 
+          ic-target="#{{ address.recID }}">
+              <label class="form-check-label" for="defaultCheck1">
+                {{ address.streetNumber }} {{ address.streetName }}
+                {% if address.description  %}
+                  </br><small class="text-muted">{{ address.description|raw }}</small>
+                {% endif %}
+              </label>
+             </div>
+          </form>
+        </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+
+        
+
+{% endblock %}
+
