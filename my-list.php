@@ -18,7 +18,7 @@ if (isset($_GET['name'])) {
 
     # Get assigned addressws
     $request = $fm->newFindCommand('AddressList');
-    $request->addFindCriterion('assignee', $_GET['name']);
+    $request->addFindCriterion('assignee', '==' . $_GET['name']);
     //$request->addFindCriterion('block', $_GET['Block']);
     $request->addSortRule('cStatus', 1);
     
