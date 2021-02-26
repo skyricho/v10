@@ -3,9 +3,11 @@
 {% block title %}At Homes{% endblock %}
 
 {% block Navbar %}
-  <a class="navbar-brand" href="index.php">At Homes</a>
+  <a class="navbar-brand" href="index.php">At Homes</a
   {% if mapNumber %}
   <button onclick="loadMapDetails({{ mapNumber }})" class="nav-link btn btn-outline-light" data-toggle="collapse" href="#map-{{ mapNumber }}-info" role="button" aria-expanded="false" aria-controls="map-{{ mapNumber }}-info" ic-get-from="mapDetails.php?Map={{ mapNumber }}" ic-target="#mapDetails">Map {{ mapNumber }}</button>
+  {% else %}
+  <a href="#" ic-get-from="memorial-2021-letters-sent.php" ic-trigger-on="load"></a>
   {% endif %}
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>          
@@ -45,11 +47,23 @@
 {% endblock %}
 
 {% block content %}
+
+<img src="img/memorial-2021.png" class="img-fluid" alt="A picture of Jesus using his arms to warmly direct us the way to go.">
+<div class="bg-dark">
+  <h6 class="text-white p-3 text-center">2021 Memorial Invitation Campaign</h6>
+        <!--<div class="text-center">
+          <span class="badge badge-light mb-2">x letters sent</span>
+        </div>-->
+</div>
+
+
+  <!--<div class="alert alert-dark" role="alert">foo</div>-->
+  <!--ic-get-from="memorial-2021-letters-sent.php" ic-trigger-on="load"-->
   <!-- Memrorial Campign -->
-  <figure class="figure">
+  <!--<figure class="figure">
     <img src="img/memorial-2021.png" class="figure-img img-fluid rounded" alt="A picture of Jesus using his arms to warmly direct us the way to go.">
     <figcaption class="figure-caption pl-2">2021 Memorial Invitation Campaign.</figcaption>
-  </figure>
+  </figure>-->
 
  
 <nav>
