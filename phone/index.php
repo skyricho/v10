@@ -146,7 +146,7 @@ if (isset($_GET['Street'])) {
                 'Name' => $record->getField('MapAssignment::cFirstName'),
                 'Suburb' => $record->getField('MapSuburb::suburb'),
                 'Colour' => $record->getField('Suburb::badgeColour'),
-                //'CoverageType' => $record->getField('MapAssignment::CoverageType')
+                'CoverageType' => $record->getField('coverageType')
             );
         }
     

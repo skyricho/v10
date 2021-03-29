@@ -44,6 +44,8 @@ if (isset($_GET['name'])) {
                 'cUnitsCount' => $record->getField('cUnitsCount'),
                 'unitsNH' => $record->getField('unitsNH'),
                 'cUnitBlockContacted' => $record->getField('cUnitBlockContacted'),
+                'suburb' => $record->getField('Suburb'),
+                'postcode' => $record->getField('Postcodes::postCode'),
             );
         }    
     }

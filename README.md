@@ -10,6 +10,11 @@ v3 and ic-indicator
 
 Use html export to to save assignee list. Use php to parse data and render to browser. See https://www.codeproject.com/Tips/1074174/Simple-Way-to-Convert-HTML-Table-Data-into-PHP-Arr]
 
+## SAT 27 FEB 2021
+Unable to get Export Records (on server) to work.
+Gonna try PHP script triggered by automator
+
+
 
 ## FRI 26 FEB 2021
 Pat assigned address to publishers

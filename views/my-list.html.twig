@@ -83,6 +83,7 @@
                 <!--<span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
                   <small><i>{{ address.modDate|date("D d M") }}</i></small>
                 </span>-->
+            
             {% if address.description  %}
               <div>
                 <small class="text-muted">{{ address.description|raw }}</small>
@@ -134,6 +135,9 @@
           ic-target="#{{ address.recID }}">
               <label class="form-check-label" for="defaultCheck1">
                 {{ address.streetNumber }} {{ address.streetName }}
+                            <div>
+                <small class="text-muted">{{ address.suburb|upper }} {{ address.postcode }} NSW</small>
+              </div>
                 {% if address.description  %}
                   </br><small class="text-muted">{{ address.description|raw }}</small>
                 {% endif %}
