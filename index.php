@@ -151,7 +151,11 @@ if (isset($_GET['Street'])) {
     );
 
 } else {
-    $request = $fm->newFindCommand('Map');
+    //Record the start time before the query is executed.
+    $started = microtime(true);
+
+    //Execute Filemaker query.
+    $request = $fm->newFindCommand('Map Lite');
     $request->addFindCriterion('mapAssignmentId', '*');
     //$request->addFindCriterion('isPhoneMap', 0);
     $result = $request->execute();
@@ -176,9 +180,21 @@ if (isset($_GET['Street'])) {
         }
     }
     
+
+    //Record the end time after the query has finished running.
+    $end = microtime(true);
+
+    //Calculate the difference in microseconds.
+    $difference = $end - $started;
+
+    //Format the time so that it only shows 10 decimal places.
+    $queryTime = number_format($difference, 10);
+
+
     echo $template->render(array(
         'availableMaps' => $availableMaps,
-        'errorMessage' => $errorMessage
+        'errorMessage' => $errorMessage,
+        'queryTime' => $queryTime
         )
     );
 
