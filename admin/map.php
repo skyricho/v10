@@ -135,9 +135,9 @@ foreach($records as $record) {
 //header("Content-Type: application/json; charset=UTF-8");
 //echo json_encode($availableMaps, JSON_NUMERIC_CHECK); // JSON_NUMERIC_CHECK to prevent integers 
 
-$fp = fopen('../map-list.json', 'w');
-fwrite($fp, json_encode($availableMaps, JSON_NUMERIC_CHECK));
-fclose($fp);
+//$fp = fopen('../map-list.json', 'w');
+//fwrite($fp, json_encode($availableMaps, JSON_NUMERIC_CHECK));
+//fclose($fp);
 //echo 'Map list saved.';
 
 # Debug form
