@@ -2,6 +2,10 @@
 
 
 ## WED 31 MACH 2021
+### Fix admin actions
+
+
+### Speed up database query
 Revert to Master (last cahnge SEP 2020)
 The branch 'Assignee-list' is buggy. The php code does not run the script to save the map list to json.
 Add code to time database query
@@ -13,6 +17,10 @@ FindAll: Query takes 17 seconds, 17 seconds, 17 seconds,
 Create new layout 'Map Lite' with only 6 fields. 
 Find Assigned maps: Query takes 0.1 seconds
 FindAll: Query takes 0.4 seconds
+index now uses Filemaker 'Map Lite' layout
+Google PageSpeed report: 96
+
+
 
 ## FRI 05 JUNE 2020
 Person Lookup is inconsistant with rendering stretnumber suffixes. Sometimes 9A and sometimes 9A
