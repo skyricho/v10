@@ -38,7 +38,8 @@ if (isset($_GET['Street'])) {
                 'streetNameWithDash' => str_replace(' ', '-', $record->getfield('Street')),
                 'description' => $record->getField('Address Description'),
                 'cUnitsCount' => $record->getField('cUnitsCount'),
-                'UnitsNH' => $record->getField('Units NH'),
+                'unitsNH' => $record->getField('unitsNH'),
+                'cUnitBlockContacted' => $record->getField('cUnitBlockContacted'),
             );
         }
     }

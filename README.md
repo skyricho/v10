@@ -1,6 +1,12 @@
 # v10
 
 
+## SAT 09 APR 2021
+Add check icon next to unit blocks that have been completed
+StreetNumber::cUnitBlockContacted
+Houseing unit label now says 'All units contacted' or 'x units to contact'
+
+
 ## WED 31 MACH 2021
 ### Fix admin actions
 
