@@ -5,6 +5,7 @@
 Add check icon next to unit blocks that have been completed
 StreetNumber::cUnitBlockContacted
 Houseing unit label now says 'All units contacted' or 'x units to contact'
+Unit status changed from 'ah' to icon + 'letter sent'
 
 
 ## WED 31 MACH 2021
