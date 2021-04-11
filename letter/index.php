@@ -92,9 +92,17 @@ if (isset($_GET['id'])) {
         );
     }
 
+    # Get locality
+    $json = file_get_contents('../map-localities.json',0,null,null);
+    $array = json_decode($json,true);
+    //var_dump($array);
+    //echo $array['1'];
+    $suburb = $array[$_GET['Map']];
+
     echo $template->render(array(
          'mapNumber' => $_GET['Map'],
          'mapStreets' => $mapStreets,
+         'suburb' => $suburb,
         )
     );
 }
