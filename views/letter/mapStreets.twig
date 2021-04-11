@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-between text-muted m-3">
+  <div>
+  	<h4>Map {{ mapNumber }}<small class="text-muted ml-1"> [locality]</small></h4>
+  </div>
+  <div>
+    <div class="dropdown">
+      <a class="btn btn-outline-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <i class="fas fa-ellipsis-v"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="index.php?Map=5&amp;Block=1">
+          Hand Map In
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="list-group">
+  {% for mapStreet in mapStreets %}
+	<li id="Map-99-Street-88" class="list-group-item">
+	  <a  href="?Map={{ mapNumber }}&Street={{ mapStreet.streetWithDash }}" role="button">
+	  {{ mapStreet.Street }}	 
+	  </a>
+	  <div class="float-right">
+      <span class="badge badge-pill badge-secondary">
+      {% if mapStreet.toContact == 0 %}
+        All contacted
+      {% else %}
+        {{ mapStreet.toContact }}
+      {% endif %}
+
+      </span>
+	  </div>
+	</li>
+  {% endfor %}
+</ul>
+
+<div class="progress m-4">
+  <div class="progress-bar bg-secondary progress-bar-striped active progress-bar-animated" role="progressbar"
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+    40% Complete
+  </div>
+</div>
+
+
