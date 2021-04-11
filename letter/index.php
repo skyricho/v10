@@ -84,7 +84,9 @@ if (isset($_GET['id'])) {
 
     $records = $result->getRecords();
     $mapStreets = array();
+    $mapToContact = 0;
     foreach($records as $record) {
+        $mapToContact = $mapToContact + $record->getField('toContact');
         $mapStreets[] = array(
             'Street' => $record->getField('street'),
             'streetWithDash' => str_replace(' ', '-', $record->getfield('street')),
@@ -99,10 +101,19 @@ if (isset($_GET['id'])) {
     //echo $array['1'];
     $suburb = $array[$_GET['Map']];
 
+    # Get Address Total
+    $json = file_get_contents('../map-address-totals.json',0,null,null);
+    $array = json_decode($json,true);
+    $addressTotal = $array[$_GET['Map']];
+
+    # Calculate progress percentage
+    $progressPercentage = floor(($addressTotal - $mapToContact) * ( 100 / $addressTotal ));
+
     echo $template->render(array(
          'mapNumber' => $_GET['Map'],
          'mapStreets' => $mapStreets,
          'suburb' => $suburb,
+         'progressPercentage' => $progressPercentage,
         )
     );
 }
