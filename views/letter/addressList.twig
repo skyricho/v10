@@ -1,0 +1,131 @@
+
+<div class="m-3">
+  <a href="?Map={{ mapNumber }}"><i class="fas fa-angle-left"></i> Back to street list</a>
+</div>
+
+<ul class="list-group">
+  {% for address in addresses %}
+    {% if address.cStatus == 'ah' %}
+      <!-- Contacted -->
+      <li id="{{ address.recID }}" class="list-group-item">
+        <div class="background-color: red;">
+          <form id="{{ address.recID }}-form">
+            <input type="hidden" name="id" value="{{ address.recID }}">
+            <input type="hidden" name="notHome" value="">
+            <input type="hidden" name="streetNumber" value="{{ address.streetNumber }}">
+            <input type="hidden" name="streetName" value="{{ address.streetName }}">
+            <input type="hidden" name="addressDescription" value="{{ address.description|raw }}">
+            
+            <div class="d-flex justify-content-between text-muted">
+              <div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" ic-target="#{{ address.recID }}" ic-confirm="Are you sure?" checked>
+                  <label class="form-check-label" for="defaultCheck1">
+                  {{ address.streetNumber }} {{ address.streetName }}
+                  </label>
+                </div>
+              </div>
+              <div>
+                <i class="fas fa-mail-bulk"></i> Letter sent
+              </div>
+            </div>
+
+             
+                <!-- hide visted date -->
+                <!--<span id="{{ address.recID }}-visitDate" class="ml-3 badge-pill badge-light text-muted">
+                  <small><i>{{ address.modDate|date("D d M") }}</i></small>
+                </span>-->
+            {% if address.description  %}
+              <div>
+                <small class="text-muted">{{ address.description|raw }}</small>
+              </div>
+            {% endif %}
+
+          </form>
+        </div>
+      </li>
+    {% elseif address.cStatus == 'DNC' %}
+      <!-- DNC -->
+      <li id="{{ address.recID }}" class="list-group-item ">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" disabled>
+          <label class="form-check-label" for="defaultCheck1">
+            <span class="badge badge-danger">DNC</span> {{ address.streetNumber }} {{ address.streetName }}
+            {% if address.description  %}
+              </br><small class="text-muted">{{ address.description|raw }}</small>
+            {% endif %}
+          </label>
+        </div>
+      </li> 
+    {% elseif address.cStatus == 'HousingUnits' %}
+      <!-- Housing Units -->
+      <li id="{{ address.recID }}" class="list-group-item">
+        {% if address.cUnitBlockContacted == 1 %}
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" checked>
+              <label class="form-check-label" for="defaultCheck1">
+                <a href="?Map={{ mapNumber}}&Street={{ address.streetNameWithDash }}&id={{ address.recID }}&streetNumber={{ address.streetNumber }}">
+                  {{ address.streetNumber }} {{ address.streetName }}                      
+                </a> 
+                <span class="ml-1">
+                  <i class="far fa-building"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <span class="text-muted">
+                <i class="fas fa-mail-bulk"></i> Letters sent
+           </span>
+          </div>
+        </div>
+        {% else %}
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" disabled>
+              <label class="form-check-label" for="defaultCheck1">
+              <a href="?Map={{ mapNumber}}&Street={{ address.streetNameWithDash }}&id={{ address.recID }}&streetNumber={{ address.streetNumber }}">
+                {{ address.streetNumber }} {{ address.streetName }} 
+              </a><i class="far fa-building"></i>
+              </label>
+              </div>
+          </div>
+          <div>
+            <span class="badge badge-pill badge-secondary">
+              {{ address.unitsNH }}
+            </span>
+          </div>
+        </div>       
+        {% endif %}
+      </li>
+      <div class="collapse" id="{{ address.streetNumber }}-{{ address.streetNameWithDash }}-units"></div>
+    {% else %}
+       <!-- Default: Not contacted yet -->
+       <li id="{{ address.recID }}" class="list-group-item">
+          <form id="{{ address.recID }}-form">
+            <input type="hidden" name="id" value="{{ address.recID }}">
+            <input type="hidden" name="isHome" value="">
+            <input type="hidden" name="streetNumber" value="{{ address.streetNumber }}">
+            <input type="hidden" name="streetName" value="{{ address.streetName }}">
+            <input type="hidden" name="addressDescription" value="{{ address.description|raw }}">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="{{ address.recID }}-checkbox" ic-post-to="updateStatus.php" 
+          ic-target="#{{ address.recID }}">
+              <label class="form-check-label" for="defaultCheck1">
+                {{ address.streetNumber }} {{ address.streetName }}
+                {% if address.description  %}
+                  </br><small class="text-muted">{{ address.description|raw }}</small>
+                {% endif %}
+              </label>
+             </div>
+          </form>
+        </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+
+        
