@@ -1,11 +1,25 @@
 # v10
 
+## TODO
+
+
+## SUN 10 ARP 2021
+Add fields to MapStreet table: houses to contact, units to contact and houses + units to contact
+Checkbox next to Housing unit blocks to standardise list and make it eaiser to scan
+List of units is now a seperate view 'unlitList.twig'
+Admin script createMapLocalitiesList.php saves map localities to json file map-localities.json
+List of streets view now pulls locality from json file
+Add 'Hand map in' form to dropdown menu
+Progress bar: Use addressTotal from Maps table to determine progress percentage
 
 ## SAT 09 APR 2021
 Add check icon next to unit blocks that have been completed
 StreetNumber::cUnitBlockContacted
 Houseing unit label now says 'All units contacted' or 'x units to contact'
 Unit status changed from 'ah' to icon + 'letter sent'
+
+### New brach: letter-writing
+Use phone view to display list of streets and add progress bar
 
 
 ## WED 31 MACH 2021
