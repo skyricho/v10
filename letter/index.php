@@ -94,7 +94,7 @@ if (isset($_GET['id'])) {
             $mapStreets[] = array(
                 'Street' => $record->getField('street'),
                 'streetWithDash' => str_replace(' ', '-', $record->getfield('street')),
-                //'toContact' => $record->getField('toContact'),
+                'toContact' => $record->getField('toContact'),
             );
         }
     }
