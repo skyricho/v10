@@ -34,9 +34,6 @@
 {% block content %}
 	<!-- Map image and info -->
 	<div class="collapse" id="map-{{ mapNumber }}-info">
-      <div class="text-center">
-          <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid" alt="Map 19">
-      </div>
       <div class="card">
         <div class="card card-body" id="mapDetails">
         </div>
@@ -81,7 +78,11 @@
 {% endif %} 	
 
 {% if mapNumber and not street %}
+  <h4 class="m-3">Map {{ mapNumber }}</h4>
   {% include 'mapStreets.twig' %}
+  <div class="text-center">
+    <img src="https://skyricho.github.io/img/maps/{{ mapNumber }}.jpg" class="img-fluid">
+  </div>
 {% endif %} 
 
 {% endblock %}
