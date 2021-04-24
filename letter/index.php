@@ -81,17 +81,22 @@ if (isset($_GET['id'])) {
     $request = $fm->newFindCommand('MapStreet');
     $request->addFindCriterion('Map', $_GET['Map']); 
     $result = $request->execute();
+    # Trap for errors
+    if (FileMaker::isError($result)) {
+        $errorMessage = $result->getMessage();
+    } else {
 
-    $records = $result->getRecords();
-    $mapStreets = array();
-    $mapToContact = 0;
-    foreach($records as $record) {
-        $mapToContact = $mapToContact + $record->getField('toContact');
-        $mapStreets[] = array(
-            'Street' => $record->getField('street'),
-            'streetWithDash' => str_replace(' ', '-', $record->getfield('street')),
-            'toContact' => $record->getField('toContact'),
-        );
+        $records = $result->getRecords();
+        $mapStreets = array();
+        $mapToContact = 0;
+        foreach($records as $record) {
+            $mapToContact = $mapToContact + $record->getField('toContact');
+            $mapStreets[] = array(
+                'Street' => $record->getField('street'),
+                'streetWithDash' => str_replace(' ', '-', $record->getfield('street')),
+                //'toContact' => $record->getField('toContact'),
+            );
+        }
     }
 
     # Get locality
@@ -114,6 +119,7 @@ if (isset($_GET['id'])) {
          'mapStreets' => $mapStreets,
          'suburb' => $suburb,
          'progressPercentage' => $progressPercentage,
+         'errorMessage' => $errorMessage,
         )
     );
 }
