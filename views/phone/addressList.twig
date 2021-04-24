@@ -1,28 +1,8 @@
 <!-- Nav: block, street and filter -->  
  {% if not errorMessage %}
- <ul class="nav">
-  <li class="nav-item">
-    <div class="dropdown">
-      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {% if street == '*' %}
-             No Answer
-          {% elseif  street %}
-            {{ street }}
-          {% else  %}
-             Street
-          {% endif %}
-      </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      {% for street in streets %}
-        <a class="dropdown-item" href="?Map={{ mapNumber }}&Street={{ street.streetWithDash }}&Filter={{ Filter }}">
-          {{ street.street }}
-        </a>
-      {% endfor %} 
-        </div>
-    </div>
-  </li>
-</ul>
-{% endif %}
+ <div class="m-3">
+  <a href="?Map={{ mapNumber }}"><i class="fas fa-angle-left"></i> Back to street list</a>
+</div>
 
 <ul class="list-group">
   {% for address in addresses %}
