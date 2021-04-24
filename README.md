@@ -1,9 +1,16 @@
 # v10
 
 ## TODO
+Hide "letter sent" text in MAy.
 
+## SAT 24 APR 201
+* Fix hand map in function
+* Hide "Still to call" on phone map info. Moved map to below street list.
 
-## SUN 10 ARP 2021
+## THU 15 APR 2021
+Add map below progess bar on street list.
+
+## SUN 10 APR 2021
 Add fields to MapStreet table: houses to contact, units to contact and houses + units to contact
 Checkbox next to Housing unit blocks to standardise list and make it eaiser to scan
 List of units is now a seperate view 'unlitList.twig'
