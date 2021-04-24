@@ -29,8 +29,7 @@ echo '<p>Map assigned to ' . '<a href="sms:' . $mobile . '">' . $assignedTo . '<
          No Answer: ' . $noAnswer . '<br>
          Disconnected: ' . $disconnected . '<br>
          No Further Action: ' . $noFurtherAction . 
-      '</p>
-      <p>Still to call: ' .  $toCall . '</p>';
+      '</p>';
 ?>
 
   <div id="alert-phone"></div>  
