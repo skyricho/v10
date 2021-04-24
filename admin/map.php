@@ -29,12 +29,16 @@ if (isset($_POST['deactivate'])) {
 	header('Location: ' . $url);
 
 } elseif (isset($_POST['unassign'])) {
-	# Hand map in
-	$edit = $fm->newEditCommand('MapAssignment', $_POST['id']);
-	$edit->setField('handInDate', date("m/d/Y"));
-    $edit->setField('endContacted', $_POST['cAH']);
-    $edit->setField('Map::mapAssignmentId', '');
+	# Update Hand Map In date
+
+    $edit = $fm->newEditCommand('Hand Map In', $_POST['id']);
+	$edit->setField('MapAssignment::handInDate', date("m/d/Y"));
 	$edit->execute();
+
+    # Unassign
+    $edit = $fm->newEditCommand('Hand Map In', $_POST['id']);
+    $edit->setField('mapAssignmentId', '');
+    $edit->execute();
 
 	echo '<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-foo">
 	        Map ' . $_POST['Map'] . ' has been handed in 
