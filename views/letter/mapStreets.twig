@@ -12,12 +12,11 @@
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
 
 
-<form ic-post-to="admin/map.php" ic-confirm="Are you sure?" ic-target="#alert">
+<form ic-post-to="../admin/map.php" ic-confirm="Are you sure?" ic-target="#alert">
     <!--<form action="admin/map.php" method="POST">-->
 
-   <input type="hidden" name="id" value="<?php echo $MapAssignmentId; ?>">
-    <input type="hidden" name="cAH" value="<?php echo $Contacted; ?>">
-    <input type="hidden" name="Map" value="<?php echo $_GET['Map']; ?>">
+   <input type="hidden" name="id" value="{{ mapNumber }}">
+    <input type="hidden" name="Map" value="{{ mapNumber }}">
     <input class="btn btn-link dropdown-item" type="submit" name="unassign" value="Hand Map In">
   </form>
 
