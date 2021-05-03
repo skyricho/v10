@@ -7,6 +7,10 @@ Hide "letter sent" text in MAy.
 * Fix hand map in function
 * Hide "Still to call" on phone map info. Moved map to below street list.
 
+### Poll Report
+Add ''''verify' => false''' to guzzle parameters. See https://docs.guzzlephp.org/en/stable/request-options.html
+or ```'verify' => 'cacert.pem', // or false``` Cert download https://curl.se/ca/cacert.pem
+
 ## THU 15 APR 2021
 Add map below progess bar on street list.
 
