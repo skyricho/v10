@@ -11,7 +11,7 @@ $template = $twig->load('group-list.html.twig');
 # Query assignee list
 $request = $fm->newFindCommand('group-publishers');
 $request->addFindCriterion('overseer', $_GET['overseer']); 
-//$request->addSortRule('name', 1);
+$request->addSortRule('name', 1);
 $result = $request->execute();
 
 //$assignees = 'baz';
