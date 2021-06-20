@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Addressing Guide | At Homes{% endblock %}
+
+{% block Navbar %}
+  <a class="navbar-brand" href="../index.php">At Homes</a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>          
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+    <ul class="navbar-nav mr-auto">
+        {% if mapNumber %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {% if navbarFilter %}
+                 Hide Contacted
+               {% else %}
+                 Show All
+               {% endif %}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}">
+              Show All
+            </a>
+            <a class="dropdown-item" href="?Map={{ mapNumber }}&Block={{blockNumber }}&Street={{ streetWithDash }}&Filter=Contacted">
+              Hide Contacted
+            </a>
+          </div>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+        <a class="nav-link" href="whatsapp://chat?code=ALhU5zMyOlu82xhiHwi8UV">Help (WhatsApp Group)</a>
+        </li> 
+        <li class="nav-item">
+        <a class="nav-link" href="../phone">Phone Calls</a>
+        </li>
+         <li class="nav-item">
+        <a class="nav-link" href="?Filter=out">Admin</a>
+        </li>
+         <li class="nav-item">
+        <a class="nav-link" href="s-13.php">S-13</a>
+        </li>
+      <!--
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="signout.php">Sign out</a>
+      </li>-->
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+  <h2>Addressing Guide</h2>
+  <p class="lead">It is important that you address your envelope correctly. Typically, the address should be written in three lines:</p>
+
+  <dl class="row">
+    <dt class="col-sm-3">Top line</dt>
+    <dd class="col-sm-9">Should contain the recipient's name. As we do not know the name of the recipient, you can leave this line blank or write 'Neighbour'.</dd>
+
+    <dt class="col-sm-3">Second to last line</dt>
+    <dd class="col-sm-9">Should contain the number and name of the street.</dd>
+
+    <dt class="col-sm-3">Bottom line</dt>
+    <dd class="col-sm-9">Should contain the suburb and state. This line should be printed in capitals without punctuation or underlining.</dd>
+  </dl>
+
+  <h4>Which type of envelope?</h4>
+  <p>Envelopes pre-printed with the four postcode squares are preferred, either DL or DLX. For envelopes without the four square boxes, the postcode should be placed last on the same line as the suburb and state.</p>
+
+  <h4>What To Do</h4>
+  <ul>
+    <li>Write the four numerals of the destination postcode clearly within the squares</li>
+    <li>Write the suburb and NSW on the bottom line in upper case</li>
+    <li>Use the correct postcode</li>
+    <li>Print clearly using dark ink; preferably black on white</li>
+    <li>Affix stamps that add up to or is more than $1.10 for a letter in a DL or DLX envelope (not A5)</li>
+  </ul>
+  <img src="../img/correctly-hand-addressed-envelope.png" class="img-fluid mb-4" alt="Correctly addressed envelope">
+
+  <h4>What Not To Do</h4>
+  <ul>
+    <li>Do not use red, yellow or orange ink</li>
+    <li>Do not indent or stagger address lines</li>
+    <li>Do not underline any words</li>
+    <li>Do not use punctuation</li>
+    <li>Do not put Suburb, State and Postcode on seperate lines</li>
+    <li>Do not draw on the front of the envelope</li>
+  </ul>
+  <img src="../img/incorrectly-hand-addressed-envelope.png" class="img-fluid mb-4" alt="Correctly addressed envelope">
+
+  <h4>Return Address</h4>
+  <p>Include a return address so the letter can be returned if it can't be delivered. Put the address on the back flap of the envelope. You may like to use the following address</p>
+
+  <ul class="list-unstyled">
+    <li>Your name</li>
+    <li>PO BOX 149</li>
+    <li>FRESHWATER NSW 2096</li>
+  </ul>
+
+  <p>To learn more, vist Australia Post addressing <a href="https://auspost.com.au/sending/check-sending-guidelines/addressing-guidelines">guidelines</a>.</p>
+
+</div>
+
+{% endblock %}
+
