@@ -136,7 +136,7 @@
               <label class="form-check-label" for="defaultCheck1">
                 {{ address.streetNumber }} {{ address.streetName }}
                             <div>
-                <small class="text-muted">{{ address.suburb|upper }} {{ address.postcode }} NSW</small>
+                <small class="text-muted">{{ address.suburb|upper }} NSW {{ address.postcode }}</small>
               </div>
                 {% if address.description  %}
                   </br><small class="text-muted">{{ address.description|raw }}</small>
